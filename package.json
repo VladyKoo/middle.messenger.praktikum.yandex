@@ -1,0 +1,17 @@
+{
+  "name": "middle.messenger.praktikum.yandex",
+  "version": "0.0.1",
+  "description": "Messanger",
+  "private": true,
+  "license": "MIT",
+  "author": "Kurochkin Vladislav",
+  "engines": {
+    "node": "^16.14.2",
+    "npm": "^8.5.0"
+  },
+  "scripts": {
+    "dev": "parcel static/index.html",
+    "build": "parcel build static/index.html",
+    "start": "node ./src/app.js"
+  }
+}
