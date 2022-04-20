@@ -1,0 +1,47 @@
+<div class='{{styles.box}}'>
+  <div class='{{styles.top-box}}'>
+    <div class='{{styles.top-back-btn-box}}'>
+      <a class='{{styles.top-back-btn}}' href='/'>
+        <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+          <path
+            d='M7.828 11H20V13H7.828L13.192 18.364L11.778 19.778L4 12L11.778 4.22205L13.192 5.63605L7.828 11Z'
+            fill='white'
+          ></path>
+        </svg>
+      </a>
+      <span class='{{styles.top-title}}'>Profile</span>
+    </div>
+    <a href='/settings'>
+      <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+        <path
+          d='M3 17.2505V21.0005H6.75L17.81 9.94055L14.06 6.19055L3 17.2505ZM20.71 7.04055C21.1 6.65055 21.1 6.02055 20.71 5.63055L18.37 3.29055C17.98 2.90055 17.35 2.90055 16.96 3.29055L15.13 5.12055L18.88 8.87055L20.71 7.04055V7.04055Z'
+          fill='white'
+        ></path>
+      </svg>
+    </a>
+  </div>
+  <div class='{{styles.content-box}}'>
+    <div class='{{styles.avatar-box}}'>
+      <div class='avatar-img-box {{styles.avatar}}'>
+        <img class='avatar-img' src='{{avatarUrl}}' alt='avatar big' />
+      </div>
+      <div class='{{styles.avatar-info-fullname}}'>{{fullname}}</div>
+      <div class='{{styles.avatar-info-phone}}'>{{phone}}</div>
+    </div>
+    <div class='{{styles.info-box}}'>
+      <div class='{{styles.info-title}}'>Info</div>
+      <div class='{{styles.info-text}}'>
+        <span>Username:</span>
+        <span>{{username}}</span>
+      </div>
+      <div class='{{styles.info-text}}'>
+        <span>Email:</span>
+        <span>{{email}}</span>
+      </div>
+      <div class='{{styles.info-text}}'>
+        <span>Description:</span>
+        <span>{{description}}</span>
+      </div>
+    </div>
+  </div>
+</div>
