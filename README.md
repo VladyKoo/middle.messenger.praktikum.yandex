@@ -25,3 +25,6 @@ $ npm run build
 # launch express server for static files at localhost:3000
 $ npm run start
 ```
+
+# Pull Requests
+https://github.com/VladyKoo/middle.messenger.praktikum.yandex/pull/1
