@@ -8,16 +8,18 @@
   "author": "Kurochkin Vladislav",
   "scripts": {
     "dev": "parcel static/index.html --port 1234",
-    "build": "parcel build static/index.html",
-    "start": "npm i && npm run build && node src/app.js"
+    "build": "cross-env NODE_ENV=production parcel build static/index.html",
+    "start": "npm run build && node src/app.js"
   },
   "dependencies": {
     "express": "4.17.3",
     "handlebars": "4.7.7"
   },
   "devDependencies": {
+    "@parcel/config-default": "2.5.0",
     "@parcel/transformer-sass": "2.4.1",
-    "parcel": "2.4.1",
+    "cross-env": "7.0.3",
+    "parcel": "2.5.0",
     "parcel-transformer-hbs": "1.0.0",
     "sass": "1.50.0"
   }
