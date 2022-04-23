@@ -10,43 +10,43 @@ export default function (ctx = {}) {
   const basetCtx = {
     title: 'Sign Up',
     form: compileForm({
-      inputs: {
-        email: compileInput({
+      inputs: [
+        compileInput({
           name: 'email',
           id: 'email',
           helper: 'This email already exists',
           label: 'Email',
           outlined: true,
         }),
-        username: compileInput({
+        compileInput({
           name: 'username',
           id: 'username',
           helper: 'This username already exists',
           label: 'Username',
           outlined: true,
         }),
-        name: compileInput({
+        compileInput({
           name: 'name',
           id: 'name',
           helper: 'This field is required',
           label: 'Name',
           outlined: true,
         }),
-        surname: compileInput({
+        compileInput({
           name: 'surname',
           id: 'surname',
           helper: 'This field is required',
           label: 'Surname',
           outlined: true,
         }),
-        phone: compileInput({
+        compileInput({
           name: 'phone',
           id: 'phone',
           helper: 'This field is required',
           label: 'Phone',
           outlined: true,
         }),
-        password: compileInput({
+        compileInput({
           type: 'password',
           name: 'password',
           id: 'password',
@@ -54,7 +54,7 @@ export default function (ctx = {}) {
           label: 'Password',
           outlined: true,
         }),
-        confirmPassword: compileInput({
+        compileInput({
           type: 'password',
           name: 'confirmPassword',
           id: 'confirmPassword',
@@ -62,7 +62,7 @@ export default function (ctx = {}) {
           label: 'Confirm Password',
           outlined: true,
         }),
-      },
+      ],
       submit: compileButton({
         title: 'Sign Up',
         type: 'submit',

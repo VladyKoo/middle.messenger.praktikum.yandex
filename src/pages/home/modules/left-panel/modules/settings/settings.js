@@ -12,52 +12,52 @@ export default function (ctx = {}) {
       arrowLeft: compileArrowLeftIcon(),
     },
     form: compileAuthForm({
-      inputs: {
-        email: compileInput({
+      inputs: [
+        compileInput({
           name: 'email',
           id: 'email',
           helper: 'This email already exists',
           label: 'Email',
         }),
-        username: compileInput({
+        compileInput({
           name: 'username',
           id: 'username',
           helper: 'This username already exists',
           label: 'Username',
         }),
-        name: compileInput({
+        compileInput({
           name: 'name',
           id: 'name',
           helper: 'This field is required',
           label: 'Name',
         }),
-        surname: compileInput({
+        compileInput({
           name: 'surname',
           id: 'surname',
           helper: 'This field is required',
           label: 'Surname',
         }),
-        phone: compileInput({
+        compileInput({
           name: 'phone',
           id: 'phone',
           helper: 'This field is required',
           label: 'Phone',
         }),
-        password: compileInput({
+        compileInput({
           type: 'password',
           name: 'password',
           id: 'password',
           helper: 'This field is required',
           label: 'Password',
         }),
-        confirmPassword: compileInput({
+        compileInput({
           type: 'password',
           name: 'confirmPassword',
           id: 'confirmPassword',
           helper: 'Your password and confirmation password do not match ',
           label: 'Confirm Password',
         }),
-      },
+      ],
       submit: compileButton({
         title: 'Сhange',
         type: 'submit',

@@ -10,15 +10,15 @@ export default function (ctx = {}) {
   const basetCtx = {
     title: 'Sign In',
     form: compileForm({
-      inputs: {
-        username: compileInput({
+      inputs: [
+        compileInput({
           name: 'username',
           id: 'username',
           helper: 'Help username',
           label: 'Username',
           outlined: true,
         }),
-        password: compileInput({
+        compileInput({
           type: 'password',
           name: 'password',
           id: 'password',
@@ -26,7 +26,7 @@ export default function (ctx = {}) {
           label: 'Password',
           outlined: true,
         }),
-      },
+      ],
       submit: compileButton({
         title: 'Sign In',
         type: 'submit',
