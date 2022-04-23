@@ -1,19 +1,17 @@
 import styles from './home.module.scss';
+import tml from './home.hbs';
 
 import compileLeftPanel from './modules/left-panel';
 import compileLenta from './modules/lenta';
 import compileAboutPanele from './modules/about-panel';
-import tml from './home.hbs';
-
-const defaultCtx = {
-  lenta: compileLenta(),
-  aboutPanel: compileAboutPanele(),
-  styles,
-};
 
 export default function (ctx = {}, route) {
-  let leftPanel = compileLeftPanel();
-  if (route) leftPanel = compileLeftPanel({}, route);
+  const basetCtx = {
+    lenta: compileLenta(),
+    leftPanel: compileLeftPanel({}, route),
+    aboutPanel: compileAboutPanele(),
+    styles,
+  };
 
-  return tml({ ...defaultCtx, leftPanel, ...ctx });
+  return tml({ ...basetCtx, ...ctx });
 }

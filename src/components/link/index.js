@@ -1,11 +1,10 @@
 import styles from './link.module.scss';
 import tml from './link.hbs';
 
-const defaultCtx = {
-  target: '_self',
-  styles,
-};
-
-export default (ctx = {}) => {
-  return tml({ ...defaultCtx, ...ctx });
-};
+export default function (ctx = {}) {
+  const basetCtx = {
+    target: '_self',
+    styles,
+  };
+  return tml({ ...basetCtx, ...ctx });
+}

@@ -16,11 +16,16 @@
   }
   .top-back-btn {
     margin-right: 20px;
+    width: 24px;
+    height: 24px;
   }
   .top-title {
     font-size: 20px;
     position: relative;
-    top: -2;
+  }
+  .top-edit-btn {
+    width: 24px;
+    height: 24px;
   }
 }
 
@@ -40,7 +45,7 @@
     width: 124px;
     height: 124px;
     margin-bottom: 8px;
-  }  
+  }
   .avatar-info-fullname {
     font-weight: 600;
     font-size: 16px;

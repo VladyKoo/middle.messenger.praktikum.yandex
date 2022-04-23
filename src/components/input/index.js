@@ -2,16 +2,24 @@ import styles from './input.module.scss';
 import tml from './input.hbs';
 
 window.addEventListener('load', () => {
-  const inputs = document.querySelectorAll('.' + styles.input);
-  inputs.forEach((node) => {
-    node.addEventListener('focus', (e) => {
+  const inputBoxes = document.querySelectorAll(`.${styles.box}`);
+  inputBoxes.forEach((node) => {
+    const input = node.querySelector(`.${styles.input}`);
+    if (!input) return;
+
+    if (input.value.trim()) {
+      input.labels[0].classList.add(styles.focused);
+      input.parentNode.classList.add(styles.focused);
+    }
+
+    input.addEventListener('focus', (e) => {
       const input = e.target;
       if (!input.value.trim()) {
         input.labels[0].classList.add(styles.focused);
         input.parentNode.classList.add(styles.focused);
       }
     });
-    node.addEventListener('blur', (e) => {
+    input.addEventListener('blur', (e) => {
       const input = e.target;
       if (!input.value.trim()) {
         input.labels[0].classList.remove(styles.focused);
@@ -21,11 +29,12 @@ window.addEventListener('load', () => {
   });
 });
 
-const defaultCtx = {
-  type: 'text',
-  styles,
-};
-
-export default (ctx = {}) => {
-  return tml({ ...defaultCtx, ...ctx });
-};
+export default function (ctx = {}) {
+  const basetCtx = {
+    type: 'text',
+    outlinedStyle: ctx.outlined ? styles.outlined : '',
+    value: '',
+    styles,
+  };
+  return tml({ ...basetCtx, ...ctx });
+}

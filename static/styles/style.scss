@@ -23,32 +23,23 @@ body {
   height: 100%;
 }
 
-.default-input {
-  outline: none;
+input {
+  outline: solid 1px transparent;
+  border: none;
 }
 
-.default-button {
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+  -webkit-text-fill-color: #1677cf99;
+  -webkit-box-shadow: 0 0 0px 1000px #000 inset;
+}
+
+button {
+  background-color: transparent;
   border: none;
   padding: 0;
   font: inherit;
   cursor: pointer;
-  outline: inherit;
-}
-
-
-.avatar-img-box {
-  position: relative;
-  border-radius: 50%;
-  overflow: hidden;
-  cursor: pointer;
-  background-color: #fff;
-}
-
-.avatar-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
 }
