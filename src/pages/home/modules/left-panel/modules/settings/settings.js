@@ -4,13 +4,17 @@ import tml from './settings.hbs';
 import compileAuthForm from '../../../../../../components/form';
 import compileInput from '../../../../../../components/input';
 import compileButton from '../../../../../../components/button';
+import compileAvatar from '../../../../../../components/avatar';
 import compileArrowLeftIcon from '../../../../../../components/icons/arrow-left';
+import compileAddPhotoIcon from '../../../../../../components/icons/add-photo';
 
 export default function (ctx = {}) {
   const basetCtx = {
     icons: {
       arrowLeft: compileArrowLeftIcon(),
+      addPhoto: compileAddPhotoIcon(),
     },
+    avatar: compileAvatar({ url: ctx?.avatarUrl }),
     form: compileAuthForm({
       inputs: [
         compileInput({

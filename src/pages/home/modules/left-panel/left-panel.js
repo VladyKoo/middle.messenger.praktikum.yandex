@@ -13,7 +13,7 @@ export default function (ctx = {}, route) {
       content = compileProfile({ avatarUrl });
       break;
     case '/settings':
-      content = compileSettings();
+      content = compileSettings({ avatarUrl });
       break;
     default:
       content = compileList({ avatarUrl });

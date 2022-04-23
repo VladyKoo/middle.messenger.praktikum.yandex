@@ -1,6 +1,8 @@
 <div class='{{styles.box}}'>
-  <div class='{{styles.top-box}}'></div>
-  <div class='{{styles.content-box}}'>
-    <span>lenta</span>
-  </div>
+  {{#if activeChat}}
+    <div class='{{styles.top-box}}'></div>
+    <div class='{{styles.content-box}} hide-scroll'>
+      <span>lenta</span>
+    </div>
+  {{/if}}
 </div>
