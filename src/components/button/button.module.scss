@@ -1,8 +1,10 @@
+@import '../../../static/styles/var';
+
 .box {
   width: 100%;
   border-radius: 8px;
   height: 100%;
-  background-color: rgb(255 255 255 / 0.6);
+  background-color: $secondary-text-color;
 }
 
 .submit {

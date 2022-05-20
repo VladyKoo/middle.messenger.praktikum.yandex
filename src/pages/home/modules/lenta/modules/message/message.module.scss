@@ -1,3 +1,5 @@
+@import '../../../../../../../static/styles/var';
+
 .container {
   width: 100%;
   margin-bottom: 5px;
@@ -10,22 +12,22 @@
   font-weight: 600;
   font-size: 14px;
   line-height: 24px;
-  color: rgb(255 255 255 / 0.6);
+  color: $secondary-text-color;
 }
 
 .box {
   max-width: 480px;
-  background-color: #212121;
+  background-color: $sent-message-bg-color;
   border-radius: 8px;
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
-  color: rgb(255 255 255 / 0.8);
+  color: $sent-message-color;
 
   &.right {
-    background-color: #bdd2b6;
+    background-color: $received-message-bg-color;
     margin-left: auto;
-    color: #1d1e22;
+    color: $received-message-color;
   }
 
   &.image {
@@ -61,11 +63,11 @@
 
 .time {
   font-size: 10px;
-  color: rgb(255 255 255 / 0.6);
+  color: $secondary-text-color;
   z-index: 10;
 
   &.right {
-    color: rgb(29 30 34 / 0.6);
+    color: #1d1e2299;
   }
 
   &.image {

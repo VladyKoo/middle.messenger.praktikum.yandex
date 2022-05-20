@@ -1,5 +1,7 @@
+@import '../../../../../static/styles/var';
+
 .box {
-  border-right: 1px solid #37393c;
+  border-right: 1px solid $border-color;
   width: 100%;
   max-width: 380px;
   height: 100vh;

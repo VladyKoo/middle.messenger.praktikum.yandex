@@ -1,7 +1,9 @@
+@import '../../../../../../../static/styles/var';
+
 .box {
   padding: 5px 15px;
   border-radius: 8px;
-  background-color: #26272d;
+  background-color: $input-bg-color;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: end;
@@ -28,7 +30,7 @@
   resize: none;
   align-self: center;
   outline: solid 1px transparent;
-  color: rgb(255 255 255 / 0.6);
+  color: $secondary-text-color;
   padding: 0 12px;
   overflow: hidden;
 
