@@ -7,7 +7,7 @@
   "license": "MIT",
   "author": "Kurochkin Vladislav",
   "scripts": {
-    "dev": "parcel static/index.html --port 1234 --no-cache",
+    "dev": "parcel static/index.html --port 3000 --no-cache",
     "build": "cross-env NODE_ENV=production parcel build static/index.html",
     "start": "npm run build && node src/app.js",
     "lint": "eslint --ext .js,.ts --ignore-path .gitignore .",
@@ -32,6 +32,7 @@
     "sass": "1.50.0",
     "stylelint": "14.8.2",
     "stylelint-config-css-modules": "4.1.0",
-    "stylelint-config-standard-scss": "3.0.0"
+    "stylelint-config-standard-scss": "3.0.0",
+    "typescript": "4.6.4"
   }
 }
