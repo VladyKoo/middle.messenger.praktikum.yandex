@@ -6,17 +6,14 @@ import { Link } from '../../components/link';
 
 export type ErrorProps = {
   styles?: Record<string, string>;
-  code: number;
-  title?: string;
+  title: string;
   link?: Link;
 };
 
 export class Error extends Block<ErrorProps> {
   constructor(props: ErrorProps) {
-    const code = props.code ?? 500;
     super({
       styles,
-      title: code === 404 ? `${code} Page Not Found` : `${code} Internal Server Error`,
       link: new Link({
         name: 'Back to chat',
         href: '/',

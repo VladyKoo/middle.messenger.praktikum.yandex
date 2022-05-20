@@ -7,6 +7,8 @@ import { Default } from './layout/default';
 
 const root = createRoot(document.querySelector('#root'));
 
+const page404 = new Error({ title: '404 Page Not Found' });
+
 const { pathname } = window.location;
 switch (pathname) {
   case '/':
@@ -33,10 +35,6 @@ switch (pathname) {
     );
     break;
   default:
-    root.render(
-      new Default({
-        outlet: new Error({ code: 404 }),
-      }),
-    );
+    root.render(new Default({ outlet: page404 }));
     break;
 }
