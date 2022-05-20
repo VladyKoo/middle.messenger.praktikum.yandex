@@ -11,6 +11,8 @@ The project will include standard chat functions:
 * **Chat list**
 * **Messaging**
 
+Figma https://www.figma.com/file/NO65Sa4RkMf1WoK7MZx6O4/yandex-messanger-public
+
 ## Build Setup
 ```bash
 # install dependencies

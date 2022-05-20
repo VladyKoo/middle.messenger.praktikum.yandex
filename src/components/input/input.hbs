@@ -1,0 +1,11 @@
+<div class='{{styles.box}}'>
+  <div class='{{styles.input-box}} {{outlinedStyle}}'>
+    <label class='{{styles.label}} {{outlinedStyle}}' for='input-{{id}}'>{{label}}</label>
+    <input class='{{styles.input}} {{outlinedStyle}}' type='{{type}}' id='input-{{id}}' name='{{name}}' value='{{value}}'/>
+  </div>
+  {{#if helper}}
+    <div class='{{styles.helper-box}} {{outlinedStyle}}'>
+      <span class='{{styles.helper}}'>{{helper}}</span>
+    </div>
+  {{/if}}
+</div>

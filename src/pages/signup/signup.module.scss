@@ -1,0 +1,25 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 405px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.title {
+  font-size: 34px;
+  line-height: 30px;
+}
+
+.form-box {
+  width: 100%;
+}
+
+.link-box {
+  font-size: 16px;
+  line-height: 20px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
