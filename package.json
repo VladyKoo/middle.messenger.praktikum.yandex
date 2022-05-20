@@ -10,7 +10,8 @@
     "dev": "parcel static/index.html --port 1234 --no-cache",
     "build": "cross-env NODE_ENV=production parcel build static/index.html",
     "start": "npm run build && node src/app.js",
-    "lint": "eslint --ext .js,.ts --ignore-path .gitignore ."
+    "lint": "eslint --ext .js,.ts --ignore-path .gitignore .",
+    "stylelint": "stylelint **/*.scss"
   },
   "dependencies": {
     "express": "4.17.3",
@@ -26,6 +27,9 @@
     "eslint-config-airbnb": "19.0.4",
     "parcel": "2.5.0",
     "parcel-transformer-hbs": "1.0.0",
-    "sass": "1.50.0"
+    "sass": "1.50.0",
+    "stylelint": "14.8.2",
+    "stylelint-config-css-modules": "4.1.0",
+    "stylelint-config-standard-scss": "3.0.0"
   }
 }
