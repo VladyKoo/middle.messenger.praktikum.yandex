@@ -33,6 +33,10 @@ export class Input extends Block<InputProps> {
     const input = this._element.querySelector(`.${styles.input}`) as HTMLInputElement;
     const label = this._element.querySelector(`.${styles.label}`);
 
+    if (!box || (!input && !label)) {
+      return;
+    }
+
     const { onBlur, onFocus } = this.props;
 
     const handleFocus = (e: Event) => {
