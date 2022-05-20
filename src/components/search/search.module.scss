@@ -1,0 +1,29 @@
+.box {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  background-color: #26272d;
+  border-radius: 8px;
+  padding: 0 50px 0 15px;
+
+  &.focused {
+    outline: 1px solid #36373f;
+  }
+}
+
+.input {
+  background-color: transparent;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  position: absolute;
+  top: calc(50% - 12px);
+  right: 15px;
+}

@@ -1,0 +1,42 @@
+.box {
+  padding: 5px 15px;
+  border-radius: 8px;
+  background-color: #26272d;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: end;
+  margin-top: 5px;
+  max-width: 100%;
+}
+
+.left-icons,
+.right-icons {
+  display: flex;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  margin: 5px 0;
+}
+
+.smile {
+  margin-right: 10px;
+}
+
+.input {
+  resize: none;
+  align-self: center;
+  outline: solid 1px transparent;
+  color: rgb(255 255 255 / 0.6);
+  padding: 0 12px;
+  overflow: hidden;
+
+  &:empty:before {
+    content: attr(data-placeholder);
+  }
+}
+
+.delete {
+  margin-right: 10px;
+}

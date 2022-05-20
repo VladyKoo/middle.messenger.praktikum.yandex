@@ -1,29 +1,42 @@
-import renderHomePage from './pages/home';
-import renderErrorPage from './pages/error';
-import renderSigninPage from './pages/signin';
-import renderSignupPage from './pages/signup';
-import renderLayout from './layout/default';
+import { createRoot } from './utils/createRoot';
+import { Home } from './pages/home';
+import { Error } from './pages/error';
+import { Signin } from './pages/signin';
+import { Signup } from './pages/signup';
+import { Default } from './layout/default';
 
-const root = document.querySelector('#root');
-
-if (!root) {
-  throw new Error('Target container is not a DOM element');
-}
+const root = createRoot(document.querySelector('#root'));
 
 const { pathname } = window.location;
 switch (pathname) {
   case '/':
   case '/profile':
   case '/settings':
-    root.innerHTML = renderLayout(renderHomePage({}, pathname));
+    root.render(
+      new Default({
+        outlet: new Home({ route: pathname }),
+      }),
+    );
     break;
   case '/signin':
-    root.innerHTML = renderLayout(renderSigninPage());
+    root.render(
+      new Default({
+        outlet: new Signin(),
+      }),
+    );
     break;
   case '/signup':
-    root.innerHTML = renderLayout(renderSignupPage());
+    root.render(
+      new Default({
+        outlet: new Signup(),
+      }),
+    );
     break;
   default:
-    root.innerHTML = renderLayout(renderErrorPage({ code: 404 }));
+    root.render(
+      new Default({
+        outlet: new Error({ code: 404 }),
+      }),
+    );
     break;
 }
