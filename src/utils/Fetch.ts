@@ -1,4 +1,4 @@
-import { queryStringify } from '../index';
+import { queryStringify } from './index';
 
 export enum METHOD {
   GET = 'GET',
@@ -7,6 +7,7 @@ export enum METHOD {
   PATCH = 'PATCH',
   DELETE = 'DELETE',
 }
+
 type Methods = keyof typeof METHOD;
 
 export type Options = {
