@@ -1,3 +1,5 @@
+@import '../../../static/styles/var';
+
 .page-wrapper {
   height: 100%;
   min-height: 100%;
@@ -6,7 +8,7 @@
 }
 
 .page {
-  color: #fff;
-  background-color: #1c1d22;
-  flex: 1
+  color: $primary-text-color;
+  background-color: $body-bg-color;
+  flex: 1;
 }

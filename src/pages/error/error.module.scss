@@ -1,9 +1,11 @@
+@import '../../../static/styles/var';
+
 .box {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  color: rgba(255, 255, 255, 0.6);
+  color: $secondary-text-color;
 }
 
 .title {

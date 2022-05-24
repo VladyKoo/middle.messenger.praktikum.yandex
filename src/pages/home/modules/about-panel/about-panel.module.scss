@@ -1,24 +1,34 @@
+@import '../../../../../static/styles/var';
+
 .box {
-  border-left: 1px solid #37393C;
-  display: flex;
-  flex-direction: column;
+  border-left: 1px solid $border-color;
   width: 100%;
   max-width: 280px;
   height: 100vh;
+  display: none;
+
+  &.show {
+    display: block;
+  }
 }
 
 .top-box {
-  border-bottom: 1px solid #37393C;
+  border-bottom: 1px solid $border-color;
   width: 100%;
   height: 64px;
-  flex-shrink: 0;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+
+  .top-close-btn {
+    margin-right: 20px;
+    width: 24px;
+    height: 24px;
+  }
 }
 
 .content-box {
   width: 100%;
   height: calc(100% - 64px);
   overflow-y: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

@@ -1,0 +1,15 @@
+<div class='{{styles.container}}'>
+  {{#if date}}
+    <div class='{{styles.date}}'>
+      {{date}}
+    </div>
+  {{/if}}
+  <div class='{{styles.box}} {{#if right}}{{styles.right}} {{/if}} {{typeStyle}}'>
+    <div class='{{styles.content}} {{typeStyle}}'>
+      {{{content}}}
+    </div>
+    <div class='{{styles.time-box}}'>
+      <time class='{{styles.time}} {{#if right}}{{styles.right}} {{/if}} {{typeStyle}}'>{{time}}</time>
+    </div>
+  </div>
+</div>

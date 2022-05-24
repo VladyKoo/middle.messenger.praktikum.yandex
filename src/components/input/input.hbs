@@ -1,10 +1,19 @@
 <div class='{{styles.box}}'>
-  <div class='{{styles.input-box}} {{outlinedStyle}}'>
-    <label class='{{styles.label}} {{outlinedStyle}}' for='input-{{id}}'>{{label}}</label>
-    <input class='{{styles.input}} {{outlinedStyle}}' type='{{type}}' id='input-{{id}}' name='{{name}}' value='{{value}}'/>
+  <div class='{{styles.input-box}} {{#if outlined}}{{styles.outlined}}{{/if}} {{#if error}}{{styles.error}}{{/if}}'>
+    {{#if label}}
+      <label class='{{styles.label}} {{#if outlined}}{{styles.outlined}}{{/if}}' for='input-{{_id}}'>{{label}}</label>
+    {{/if}}
+    <input
+      class='{{styles.input}} {{#if outlined}}{{styles.outlined}}{{/if}}'
+      type='{{type}}'
+      id='input-{{_id}}'
+      name='{{name}}'
+      value='{{value}}'
+      placeholder='{{placeholder}}'
+    />
   </div>
   {{#if helper}}
-    <div class='{{styles.helper-box}} {{outlinedStyle}}'>
+    <div class='{{styles.helper-box}} {{#if outlined}}{{styles.outlined}}{{/if}} {{#if error}}{{styles.error}}{{/if}}'>
       <span class='{{styles.helper}}'>{{helper}}</span>
     </div>
   {{/if}}

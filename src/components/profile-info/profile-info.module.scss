@@ -1,0 +1,52 @@
+@import '../../../static/styles/var';
+
+.avatar-box {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid $border-color;
+
+  .avatar {
+    width: 124px;
+    height: 124px;
+    margin-bottom: 8px;
+  }
+
+  .avatar-info-fullname {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .avatar-info-phone {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    color: $secondary-text-color;
+  }
+}
+
+.info-box {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid $border-color;
+
+  .info-title {
+    padding-bottom: 20px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .info-text {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    color: $secondary-text-color;
+    display: flex;
+    justify-content: space-between;
+  }
+}

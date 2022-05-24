@@ -1,29 +1,35 @@
+@import '../../../../../../../static/styles/var';
+
 .box {
   width: 100%;
   height: 100%;
 }
 
 .top-box {
-  border-bottom: 1px solid #37393c;
+  border-bottom: 1px solid $border-color;
   width: 100%;
   height: 64px;
   padding: 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   .top-back-btn-box {
     display: flex;
     align-items: center;
   }
+
   .top-back-btn {
     margin-right: 20px;
     width: 24px;
     height: 24px;
   }
+
   .top-title {
     font-size: 20px;
     position: relative;
   }
+
   .top-edit-btn {
     width: 24px;
     height: 24px;
@@ -42,22 +48,25 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid #37393c;
+  border-bottom: 1px solid $border-color;
+
   .avatar {
     width: 124px;
     height: 124px;
     margin-bottom: 8px;
   }
+
   .avatar-info-fullname {
     font-weight: 600;
     font-size: 16px;
     line-height: 24px;
   }
+
   .avatar-info-phone {
     font-weight: 600;
     font-size: 14px;
     line-height: 20px;
-    color: rgba(255, 255, 255, 0.6);
+    color: $secondary-text-color;
   }
 }
 
@@ -65,18 +74,20 @@
   padding: 24px;
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid #37393c;
+  border-bottom: 1px solid $border-color;
+
   .info-title {
     padding-bottom: 20px;
     font-weight: 600;
     font-size: 16px;
     line-height: 24px;
   }
+
   .info-text {
     font-weight: 600;
     font-size: 14px;
     line-height: 24px;
-    color: rgba(255, 255, 255, 0.6);
+    color: $secondary-text-color;
     display: flex;
     justify-content: space-between;
   }

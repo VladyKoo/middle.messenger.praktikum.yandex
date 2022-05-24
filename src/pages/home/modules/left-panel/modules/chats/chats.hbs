@@ -1,0 +1,23 @@
+<div class='{{styles.box}}'>
+  <div class='{{styles.top-box}}'>
+    <a class='{{styles.top-avatar}}' href='/profile'>
+      {{{avatar}}}
+    </a>
+    <div class='{{styles.top-btns}}'>
+      <button class='{{styles.new-chat-icon}}'>
+        {{{newChatIcon}}}
+      </button>
+      <button class='{{styles.more-icon}}'>
+        {{{moreIcon}}}
+      </button>
+    </div>
+  </div>
+  <div class='{{styles.content-box}} hide-scroll'>
+    <div class='{{styles.content-search}}'>{{{search}}}</div>
+    <div class='{{styles.content-items}}'>
+      {{#each chatItems}}
+        {{{this}}}
+      {{/each}}
+    </div>
+  </div>
+</div>

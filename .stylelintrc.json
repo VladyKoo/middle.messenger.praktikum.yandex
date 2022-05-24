@@ -1,0 +1,10 @@
+{
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-css-modules"],
+  "rules": {
+    "rule-empty-line-before": "always-multi-line",
+    "string-quotes": "single",
+    "alpha-value-notation": "number",
+    "property-no-vendor-prefix": null
+  },
+  "ignoreFiles": ["dist/*", "node_modules/*"]
+}

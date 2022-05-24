@@ -1,8 +1,29 @@
 <div class='{{styles.box}}'>
-  {{#if activeChat}}
-    <div class='{{styles.top-box}}'></div>
-    <div class='{{styles.content-box}} hide-scroll'>
-      <span>lenta</span>
+  {{#if show}}
+    <div class='{{styles.top-box}}'>
+      <button class='{{styles.top-avatar}}'>
+        {{{avatar}}}
+      </button>
+      <div class='{{styles.top-btns}}'>
+        <div class='{{styles.search}}'>
+          {{{search}}}
+        </div>
+        <button class='{{styles.more-icon}}'>
+          {{{moreIcon}}}
+        </button>
+      </div>
+    </div>
+    <div class='{{styles.content-box}}'>
+      <div class='{{styles.message-box}} hide-scroll'>
+        <div class='{{styles.messages}}'>
+          {{#each messages}}
+            {{{this}}}
+          {{/each}}
+        </div>
+      </div>
+      <div class='{{styles.input}}'>
+        {{{chatInput}}}
+      </div>
     </div>
   {{/if}}
 </div>

@@ -1,0 +1,79 @@
+@import '../../../../../../../static/styles/var';
+
+.container {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.date {
+  height: 24px;
+  text-align: center;
+  margin: 10px 0;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  color: $secondary-text-color;
+}
+
+.box {
+  max-width: 480px;
+  background-color: $sent-message-bg-color;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: $sent-message-color;
+
+  &.right {
+    background-color: $received-message-bg-color;
+    margin-left: auto;
+    color: $received-message-color;
+  }
+
+  &.image {
+    max-width: 380px;
+    position: relative;
+  }
+}
+
+.content {
+  padding: 15px 15px 0;
+
+  &.image {
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 380px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.time-box {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 5px;
+}
+
+.time {
+  font-size: 10px;
+  color: $secondary-text-color;
+  z-index: 10;
+
+  &.right {
+    color: #1d1e2299;
+  }
+
+  &.image {
+    background-color: rgb(0 0 0 / 0.3);
+    padding: 0 5px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+  }
+}

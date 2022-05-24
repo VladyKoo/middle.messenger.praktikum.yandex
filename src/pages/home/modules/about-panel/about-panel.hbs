@@ -1,6 +1,11 @@
-<div class='{{styles.box}}'>
-  <div class='{{styles.top-box}}'></div>
+<div class='{{styles.box}} {{#if show}}{{styles.show}}{{/if}}'>
+  <div class='{{styles.top-box}}'>
+    <button class='{{styles.top-close-btn}}'>
+      {{{closeIcon}}}
+    </button>
+    <span class='{{styles.top-title}}'>Contact info</span>
+  </div>
   <div class='{{styles.content-box}} hide-scroll'>
-    <span>about</span>
+    {{{profileInfo}}}
   </div>
 </div>
