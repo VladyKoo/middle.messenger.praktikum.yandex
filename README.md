@@ -29,4 +29,4 @@ $ npm run start
 ```
 
 # Pull Requests
-https://github.com/VladyKoo/middle.messenger.praktikum.yandex/pull/2
+https://github.com/VladyKoo/middle.messenger.praktikum.yandex/pull/3
