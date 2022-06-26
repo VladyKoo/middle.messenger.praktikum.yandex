@@ -1,5 +1,3 @@
-import { queryStringify } from './index';
-
 export enum METHOD {
   GET = 'GET',
   POST = 'POST',
@@ -10,61 +8,62 @@ export enum METHOD {
 
 type Methods = keyof typeof METHOD;
 
-export type Options = {
-  method: Methods;
+export type FetchOptions = {
+  method?: Methods;
   data?: any;
+  baseUrl?: string;
   headers?: Record<string, string>;
+  withCredentials?: boolean;
   responseType?: 'json' | 'text' | 'document' | 'blob' | 'arraybuffer';
 };
 
-export type OptionsWithoutMethod = Omit<Options, 'method'>;
+export type OptionsWithoutMethod = Omit<FetchOptions, 'method'>;
 
 export type FetchResponse = {
   status: number;
   ok: boolean;
-  data?: ArrayBuffer | Blob | Document | JSON | string;
+  data?: any;
 };
 
 export class Fetch {
-  options: Options;
+  options: FetchOptions;
 
-  constructor(options: Options = { method: METHOD.GET }) {
-    this.options = options;
+  constructor(options: FetchOptions = {}) {
+    this.options = { method: METHOD.GET, ...options };
   }
 
-  get(url: string, options: OptionsWithoutMethod = {}): Promise<FetchResponse> {
-    let queries = '';
-    if (options.data) {
-      queries = queryStringify(options.data);
-    }
-    return this.request(url + queries, { ...options, method: METHOD.GET });
+  public get(url: string, options: OptionsWithoutMethod = {}): Promise<FetchResponse> {
+    return this.request(url, { ...options, method: METHOD.GET });
   }
 
-  post(url: string, options: OptionsWithoutMethod = {}): Promise<FetchResponse> {
+  public post(url: string, options: OptionsWithoutMethod = {}): Promise<FetchResponse> {
     return this.request(url, { ...options, method: METHOD.POST });
   }
 
-  put(url: string, options: OptionsWithoutMethod = {}): Promise<FetchResponse> {
+  public put(url: string, options: OptionsWithoutMethod = {}): Promise<FetchResponse> {
     return this.request(url, { ...options, method: METHOD.PUT });
   }
 
-  patch(url: string, options: OptionsWithoutMethod = {}): Promise<FetchResponse> {
+  public patch(url: string, options: OptionsWithoutMethod = {}): Promise<FetchResponse> {
     return this.request(url, { ...options, method: METHOD.PATCH });
   }
 
-  delete(url: string, options: OptionsWithoutMethod = {}): Promise<FetchResponse> {
+  public delete(url: string, options: OptionsWithoutMethod = {}): Promise<FetchResponse> {
     return this.request(url, { ...options, method: METHOD.DELETE });
   }
 
-  request(url: string, options: Options = { method: METHOD.GET }): Promise<FetchResponse> {
-    this.options = { ...this.options };
+  public request(url: string, options: FetchOptions = {}): Promise<FetchResponse> {
+    this.options = { ...this.options, ...options };
+
     return new Promise((resolve, reject) => {
-      const { method, data, headers, responseType = 'json' } = options;
+      const { method = 'GET', data, headers, responseType = 'json', withCredentials = false } = this.options;
 
       const xhr = new XMLHttpRequest();
-      xhr.open(method, url);
+      xhr.open(method, this.getUrl(url));
 
       xhr.responseType = responseType;
+
+      xhr.withCredentials = withCredentials;
 
       if (headers) {
         Object.entries(headers).forEach(([key, value]) => {
@@ -91,8 +90,22 @@ export class Fetch {
       if (method === METHOD.GET || data === undefined) {
         xhr.send();
       } else {
-        xhr.send(JSON.stringify(data));
+        const body = data instanceof FormData ? data : JSON.stringify(data);
+        xhr.send(body);
       }
     });
+  }
+
+  public getUrl(url: string) {
+    const { baseUrl } = this.options;
+    let fetchUrl = '';
+
+    if (url.includes('://')) {
+      fetchUrl = url;
+    } else if (baseUrl) {
+      fetchUrl = baseUrl + url;
+    }
+
+    return fetchUrl;
   }
 }

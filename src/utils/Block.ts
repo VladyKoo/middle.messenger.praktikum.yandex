@@ -1,15 +1,16 @@
-/* eslint class-methods-use-this: ["error", { "exceptMethods": ["spliteProps", "componentDidMount", "componentDidUpdate", "addEvents"] }] */
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["spliteProps", "componentDidMount", "componentDidUpdate","componentWillDestroy",  "addEvents", "replaceStub"] }] */
 
 import { v4 as makeUUID } from 'uuid';
 
 import { EventBus } from './EventBus';
-import { deepClone, deepCompare } from './index';
+import { cloneDeep, debounce } from './index';
 
-export abstract class Block<Props = {}> {
+export abstract class Block<Props = object> {
   private _EVENTS = {
     INIT: '_init',
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
+    FLOW_CWD: 'flow:component-will-destroy',
     FLOW_RENDER: 'flow:render',
   };
 
@@ -17,7 +18,7 @@ export abstract class Block<Props = {}> {
 
   private _eventBus = new EventBus();
 
-  protected _element: HTMLElement | null;
+  protected _element: HTMLElement | null = null;
 
   private _removeEvents: void | (() => void);
 
@@ -26,6 +27,10 @@ export abstract class Block<Props = {}> {
   public props: Props;
 
   public children: Props = <Props>{};
+
+  private propsBeingUpdated: boolean = false;
+
+  private oldProps: Props;
 
   constructor(props: Props = <Props>{}, tagName = 'div') {
     this.tagName = tagName;
@@ -38,22 +43,42 @@ export abstract class Block<Props = {}> {
   }
 
   private _makeProxy(props: Props): Props {
-    const proxyProps = new Proxy(props, {
+    const debounceEmit = debounce((...args) => {
+      this.propsBeingUpdated = false;
+      this._eventBus.emit(this._EVENTS.FLOW_CDU, ...args);
+    }, 150);
+
+    const proxyProps = new Proxy<Props>(props, {
       /* eslint no-param-reassign: ["error", { "props": false }] */
       set: (target, name: string, value) => {
         const oldValue = target[name];
 
-        const isChanged = !deepCompare(oldValue, value);
+        if (Array.isArray(oldValue)) {
+          oldValue.forEach((oldValueItem) => {
+            if (oldValueItem instanceof Block) {
+              oldValueItem.dispatchComponentWillDestroy();
+            }
+          });
+        }
 
-        const oldProps = isChanged ? { ...this.props, [name]: deepClone(oldValue) } : this.props;
+        if (oldValue instanceof Block) {
+          oldValue.dispatchComponentWillDestroy();
+        }
+
+        if (!this.propsBeingUpdated) {
+          this.oldProps = cloneDeep(this.props);
+        }
 
         target[name] = value;
 
-        this._eventBus.emit(this._EVENTS.FLOW_CDU, oldProps, this.props, isChanged);
+        this.propsBeingUpdated = true;
+
+        debounceEmit(this.oldProps, this.props);
+
         return true;
       },
       deleteProperty() {
-        throw new Error('Нет доступа');
+        throw new Error('Access denied');
       },
     });
 
@@ -64,6 +89,7 @@ export abstract class Block<Props = {}> {
     this._eventBus.on(this._EVENTS.INIT, this._init.bind(this));
     this._eventBus.on(this._EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     this._eventBus.on(this._EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    this._eventBus.on(this._EVENTS.FLOW_CWD, this._componentWillDestroy.bind(this));
     this._eventBus.on(this._EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
@@ -94,27 +120,49 @@ export abstract class Block<Props = {}> {
   private _componentDidMount(): void {
     this._eventBus.emit(this._EVENTS.FLOW_RENDER);
     this.componentDidMount();
-
-    Object.values(this.children).forEach((child) => {
-      child.dispatchComponentDidMount();
-    });
   }
+
+  protected componentDidMount(): void {}
 
   protected dispatchComponentDidMount(): void {
     this._eventBus.emit(this._EVENTS.FLOW_CDM);
   }
 
-  protected componentDidMount(): void {}
-
-  private _componentDidUpdate(oldProps: Props, newProps: Props, isChanged: boolean): void {
+  private _componentDidUpdate(oldProps: Props, newProps: Props): void {
     const response = this.componentDidUpdate(oldProps, newProps);
 
-    if (response || isChanged) {
+    if (response !== false) {
       this._eventBus.emit(this._EVENTS.FLOW_RENDER);
     }
   }
 
   protected componentDidUpdate(oldProps?: Props, newProps?: Props): boolean | void {}
+
+  private _componentWillDestroy(): void {
+    Object.values(this.children).forEach((child) => {
+      if (Array.isArray(child)) {
+        child.forEach((nestedChild) => {
+          nestedChild.dispatchComponentWillDestroy();
+        });
+      } else {
+        child.dispatchComponentWillDestroy();
+      }
+    });
+
+    this.componentWillDestroy();
+
+    if (this._removeEvents) {
+      this._removeEvents();
+    }
+
+    this._element?.remove();
+  }
+
+  protected componentWillDestroy(): void {}
+
+  public dispatchComponentWillDestroy(): void {
+    this._eventBus.emit(this._EVENTS.FLOW_CWD);
+  }
 
   protected compile(template: (ctx: any) => string, props: Props = <Props>{}): DocumentFragment {
     const propsAndStubs = { ...props };
@@ -123,13 +171,14 @@ export abstract class Block<Props = {}> {
 
     Object.entries(propsAndStubs).forEach(([key, value]) => {
       if (Array.isArray(value)) {
-        const values = [];
+        const values: unknown[] = [];
+        this.children[key] = [];
 
         value.forEach((elem) => {
           if (elem instanceof Block) {
             values.push(`<div data-id="${elem._id}"></div>`);
 
-            this.children[elem._id] = elem;
+            this.children[key].push(elem);
           } else {
             values.push(elem);
           }
@@ -147,27 +196,37 @@ export abstract class Block<Props = {}> {
 
     fragment.innerHTML = template(propsAndStubs);
 
-    const attrs = fragment.content.children[0].attributes;
+    const attrs = fragment.content?.children[0]?.attributes || [];
 
     Object.values(attrs).forEach((attr) => {
       if (this._element) {
-        this._element.setAttribute(attr.nodeName, attr.nodeValue);
+        this._element.setAttribute(attr.nodeName, attr.nodeValue || '');
       }
     });
 
     fragment.innerHTML = fragment.content.children[0].innerHTML;
 
     Object.values(this.children).forEach((child) => {
-      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
-
-      if (!stub) {
-        return;
+      if (Array.isArray(child)) {
+        child.forEach((nestedChild) => {
+          this.replaceStub(nestedChild, fragment);
+        });
+      } else {
+        this.replaceStub(child, fragment);
       }
-
-      stub.replaceWith(child.getContent());
     });
 
     return fragment.content;
+  }
+
+  private replaceStub(child: Block, fragment: HTMLTemplateElement) {
+    const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
+
+    if (!stub) {
+      return;
+    }
+
+    stub.replaceWith(child.getContent());
   }
 
   private _render(): void {
@@ -188,5 +247,5 @@ export abstract class Block<Props = {}> {
     this._removeEvents = this.addEvents();
   }
 
-  protected addEvents(): void | (() => void) {}
+  protected addEvents(): (() => void) | void {}
 }

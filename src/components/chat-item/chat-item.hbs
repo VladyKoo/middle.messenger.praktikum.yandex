@@ -1,15 +1,17 @@
-<a class='{{styles.box}}' href='/{{id}}'>
+<button class='{{styles.box}}'>
   <div class='{{styles.avatar}}'>
-    {{{avatar}}}
+    {{{avatarImg}}}
   </div>
   <div class='{{styles.caption}}'>
     <div class='{{styles.title}}'>
-      <span class='{{styles.fullname}}'>{{surname}} {{name}}</span>
+      <span class='{{styles.title}}'>{{title}}</span>
       <time class='{{styles.time}}'>{{messageTime}}</time>
     </div>
     <div class='{{styles.subtitle}}'>
       <span class='{{styles.message}}'>{{lastMessage}}</span>
-      <span class='{{styles.counter}}'>{{counter}}</span>
+      {{#if counter}}
+        <span class='{{styles.counter}}'>{{counter}}</span>
+      {{/if}}
     </div>
   </div>
-</a>
+</button>

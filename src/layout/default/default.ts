@@ -4,12 +4,14 @@ import tmpl from './default.hbs';
 
 export type DefaultProps = {
   styles?: Record<string, string>;
-  outlet: Block;
+  outlet: new (...args: any[]) => any;
+  outletProp?: any
 };
 
 export class Default extends Block<DefaultProps> {
   constructor(props: DefaultProps) {
-    super({ styles, ...props });
+    const outlet = new props.outlet(props.outletProp);
+    super({ styles, ...props, outlet });
   }
 
   render(): DocumentFragment {

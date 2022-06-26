@@ -1,10 +1,9 @@
 import { Block } from '../../utils/Block';
-import styles from './home.module.scss';
-import tmpl from './home.hbs';
-
 import { LeftPanel } from './modules/left-panel';
 import { Lenta } from './modules/lenta';
 import { AboutPanel } from './modules/about-panel';
+import styles from './home.module.scss';
+import tmpl from './home.hbs';
 
 export type HomeProps = {
   styles?: Record<string, string>;
@@ -18,9 +17,9 @@ export class Home extends Block<HomeProps> {
   constructor(props: HomeProps) {
     super({
       styles,
-      lenta: new Lenta({ show: true }),
+      lenta: new Lenta(),
       leftPanel: new LeftPanel({ route: props.route }),
-      aboutPanel: new AboutPanel({ show: true }),
+      aboutPanel: new AboutPanel(),
       ...props,
     });
   }

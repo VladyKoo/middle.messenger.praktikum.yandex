@@ -16,6 +16,7 @@ export type InputProps = {
   validator?: Validator;
   onFocus?: (e?: Event) => void;
   onBlur?: (e?: Event) => void;
+  onEnter?: (e: Event) => void;
 };
 
 export class Input extends Block<InputProps> {
@@ -28,16 +29,20 @@ export class Input extends Block<InputProps> {
     });
   }
 
-  addEvents() {
+  addEvents(): (() => void) | void {
+    if (!this._element) {
+      return;
+    }
+
     const box = this._element.querySelector(`.${styles['input-box']}`);
     const input = this._element.querySelector(`.${styles.input}`) as HTMLInputElement;
     const label = this._element.querySelector(`.${styles.label}`);
 
-    if (!box || (!input && !label)) {
+    if (!box || !input || !label) {
       return;
     }
 
-    const { onBlur, onFocus } = this.props;
+    const { onBlur, onFocus, onEnter } = this.props;
 
     const handleFocus = (e: Event) => {
       if (onFocus) {
@@ -65,6 +70,12 @@ export class Input extends Block<InputProps> {
       }
     };
 
+    const handleEnter = (e: KeyboardEvent) => {
+      if (e.key === 'Enter' && onEnter) {
+        onEnter(e);
+      }
+    };
+
     if (input) {
       if (input.value.trim()) {
         label.classList.add(styles.focused);
@@ -72,11 +83,13 @@ export class Input extends Block<InputProps> {
       }
       input.addEventListener('focus', handleFocus);
       input.addEventListener('blur', handleBlur);
+      input.addEventListener('keydown', handleEnter);
     }
 
     return () => {
       input.removeEventListener('focus', handleFocus);
       input.removeEventListener('blur', handleBlur);
+      input.removeEventListener('keydown', handleEnter);
     };
   }
 
@@ -85,7 +98,7 @@ export class Input extends Block<InputProps> {
 
     if (!validator) return;
 
-    const { isValid, helper } = validator(value);
+    const { isValid, helper } = validator(value || '');
 
     if (!isValid) {
       this.setProps({ helper });
