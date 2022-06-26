@@ -7,7 +7,7 @@
   "license": "MIT",
   "author": "Kurochkin Vladislav",
   "scripts": {
-    "dev": "parcel static/index.html --port 3000 --no-cache",
+    "dev": "parcel static/index.html --port 5000 --no-cache",
     "build": "cross-env NODE_ENV=production parcel build static/index.html",
     "start": "npm run build && node src/app.js",
     "lint": "eslint --ext .js,.ts --ignore-path .gitignore .",
