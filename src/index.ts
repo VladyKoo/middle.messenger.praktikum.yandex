@@ -6,7 +6,11 @@ import { AuthController } from './controllers/auth';
 const authController = new AuthController();
 const chatsController = new ChatsController();
 
-authController.getUser();
+authController.getUser().then((data) => {
+  if (data) {
+    router.go('/messenger');
+  }
+});
 chatsController.getChats();
 
 store.subscribe(() => {

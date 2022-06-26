@@ -10,6 +10,10 @@ export class UserController {
       const { state } = store;
       const result = await userApi.updateProfile(payload);
 
+      if (result.status === 401) {
+        state.auth.isAuth = false;
+      }
+
       if (result.ok) {
         const data = result.data as User;
 
@@ -19,10 +23,6 @@ export class UserController {
         state.auth.user.login = data.login || '';
         state.auth.user.email = data.email || '';
         state.auth.user.phone = data.phone || '';
-      }
-
-      if (result.status === 401) {
-        state.auth.isAuth = false;
       }
     } catch (error) {
       console.error(error);
@@ -45,12 +45,12 @@ export class UserController {
     try {
       const result = await userApi.updateAvatar(payload);
 
-      if (result.ok) {
-        store.state.auth.user.avatar = ResourcesController.getResourcePath(result.data.avatar);
-      }
-
       if (result.status === 401) {
         store.state.auth.isAuth = false;
+      }
+
+      if (result.ok) {
+        store.state.auth.user.avatar = ResourcesController.getResourcePath(result.data.avatar);
       }
     } catch (error) {
       console.error(error);
@@ -61,12 +61,12 @@ export class UserController {
     try {
       const result = await userApi.searchUser(login);
 
-      if (result.ok) {
-        return result.data;
-      }
-
       if (result.status === 401) {
         store.state.auth.isAuth = false;
+      }
+
+      if (result.ok) {
+        return result.data;
       }
     } catch (error) {
       console.error(error);

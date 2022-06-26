@@ -18,6 +18,10 @@ export class ChatsController {
     try {
       const result = await chatsApi.getChats({ offset: 0, limit: 20, ...queries });
 
+      if (result.status === 401) {
+        store.state.auth.isAuth = false;
+      }
+
       if (result.ok) {
         const chats = result.data.map((chat) => ({
           ...chat,
@@ -33,10 +37,6 @@ export class ChatsController {
         const aboutChat = chats.find((el) => el.id === store.state.chats?.aboutChat?.id);
         store.state.chats.aboutChat = aboutChat ? aboutChat : null;
       }
-
-      if (result.status === 401) {
-        store.state.auth.isAuth = false;
-      }
     } catch (error) {
       console.error(error);
     }
@@ -46,12 +46,12 @@ export class ChatsController {
     try {
       const result = await chatsApi.createChat(title);
 
-      if (result.ok) {
-        this.getChats();
-      }
-
       if (result.status === 401) {
         store.state.auth.isAuth = false;
+      }
+
+      if (result.ok) {
+        this.getChats();
       }
     } catch (error) {
       console.error(error);
@@ -62,12 +62,12 @@ export class ChatsController {
     try {
       const result = await chatsApi.deleteChat(chatId);
 
-      if (result.ok) {
-        this.getChats();
-      }
-
       if (result.status === 401) {
         store.state.auth.isAuth = false;
+      }
+
+      if (result.ok) {
+        this.getChats();
       }
     } catch (error) {
       console.error(error);
@@ -78,12 +78,12 @@ export class ChatsController {
     try {
       const result = await chatsApi.updateAvatar(payload);
 
-      if (result.ok) {
-        this.getChats();
-      }
-
       if (result.status === 401) {
         store.state.auth.isAuth = false;
+      }
+
+      if (result.ok) {
+        this.getChats();
       }
     } catch (error) {
       console.error(error);
@@ -93,6 +93,10 @@ export class ChatsController {
   public async getChatUsers(id: number, queries: Partial<GetChatUsersQueriesModel> = {}) {
     try {
       const result = await chatsApi.getUsers(id, { offset: 0, limit: 5, ...queries });
+
+      if (result.status === 401) {
+        store.state.auth.isAuth = false;
+      }
 
       if (result.ok) {
         const chatUsers = result.data.reduce((acc, chatUser) => {
@@ -111,10 +115,6 @@ export class ChatsController {
 
         return chatUsers;
       }
-
-      if (result.status === 401) {
-        store.state.auth.isAuth = false;
-      }
     } catch (error) {
       console.error(error);
     }
@@ -124,12 +124,12 @@ export class ChatsController {
     try {
       const result = await chatsApi.addUsers(payload);
 
-      if (result.ok) {
-        this.getChatUsers(payload.chatId);
-      }
-
       if (result.status === 401) {
         store.state.auth.isAuth = false;
+      }
+
+      if (result.ok) {
+        this.getChatUsers(payload.chatId);
       }
     } catch (error) {
       console.error(error);
@@ -140,12 +140,12 @@ export class ChatsController {
     try {
       const result = await chatsApi.deleteUsers(payload);
 
-      if (result.ok) {
-        this.getChatUsers(payload.chatId);
-      }
-
       if (result.status === 401) {
         store.state.auth.isAuth = false;
+      }
+
+      if (result.ok) {
+        this.getChatUsers(payload.chatId);
       }
     } catch (error) {
       console.error(error);
@@ -156,14 +156,14 @@ export class ChatsController {
     try {
       const result = await chatsApi.getToken(chatId);
 
-      if (result.ok) {
-        store.state.chats.token = result.data.token;
-        return result.data.token;
-      }
-
       if (result.status === 401) {
         store.state.auth.isAuth = false;
         return null;
+      }
+
+      if (result.ok) {
+        store.state.chats.token = result.data.token;
+        return result.data.token;
       }
     } catch (error) {
       console.error(error);

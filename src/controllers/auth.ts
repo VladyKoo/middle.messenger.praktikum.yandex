@@ -10,13 +10,13 @@ export class AuthController {
     try {
       const result = await authApi.signin(payload);
 
+      if (result.status === 401) {
+        store.state.auth.isAuth = false;
+      }
+
       if (result.ok) {
         store.state.auth.isAuth = true;
         router.go('/messenger');
-      }
-
-      if (result.status === 401) {
-        store.state.auth.isAuth = false;
       }
     } catch (error) {
       console.error(error);
@@ -27,13 +27,13 @@ export class AuthController {
     try {
       const result = await authApi.signup(payload);
 
+      if (result.status === 401) {
+        store.state.auth.isAuth = false;
+      }
+
       if (result.ok) {
         store.state.auth.isAuth = true;
         router.go('/messenger');
-      }
-
-      if (result.status === 401) {
-        store.state.auth.isAuth = false;
       }
     } catch (error) {
       console.error(error);
@@ -44,13 +44,13 @@ export class AuthController {
     try {
       const result = await authApi.logout();
 
+      if (result.status === 401) {
+        store.state.auth.isAuth = false;
+      }
+
       if (result.ok) {
         store.state.auth.isAuth = false;
         router.go('/');
-      }
-
-      if (result.status === 401) {
-        store.state.auth.isAuth = false;
       }
     } catch (error) {
       console.error(error);
@@ -61,6 +61,10 @@ export class AuthController {
     try {
       const { state } = store;
       const result = await authApi.getUser();
+
+      if (result.status === 401) {
+        state.auth.isAuth = false;
+      }
 
       if (result.ok) {
         const data = result.data as User;
@@ -78,10 +82,7 @@ export class AuthController {
         if (data.avatar) {
           state.auth.user.avatar = ResourcesController.getResourcePath(data.avatar);
         }
-      }
-
-      if (result.status === 401) {
-        state.auth.isAuth = false;
+        return data;
       }
     } catch (error) {
       console.error(error);
