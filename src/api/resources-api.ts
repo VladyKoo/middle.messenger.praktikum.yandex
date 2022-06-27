@@ -6,11 +6,11 @@ export class ResourcesApi extends BaseAPI {
     super({ basePath: '/resources' });
   }
 
-  public getResource(path: string): Promise<FetchResponse> {
-    return this.post(`/${path}`, {});
+  public getResource<D>(path: string): Promise<FetchResponse<D>> {
+    return this.post<D>(`/${path}`, {});
   }
 
-  public updateResource(data: FormData): Promise<FetchResponse> {
-    return this.post('/', { data });
+  public updateResource<D>(data: FormData): Promise<FetchResponse<D>> {
+    return this.post<D>('/', { data });
   }
 }

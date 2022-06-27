@@ -1,4 +1,4 @@
-import { store } from '../store';
+import { store, Chat, ChatUser, Message } from '../store';
 import { ResourcesController } from './resources';
 import {
   ChatsApi,
@@ -16,13 +16,13 @@ const webSocketApi = new WebSocketApi();
 export class ChatsController {
   public async getChats(queries: Partial<GetChatQueriesModel> = {}) {
     try {
-      const result = await chatsApi.getChats({ offset: 0, limit: 20, ...queries });
+      const result = await chatsApi.getChats<Chat[]>({ offset: 0, limit: 20, ...queries });
 
       if (result.status === 401) {
         store.state.auth.isAuth = false;
       }
 
-      if (result.ok) {
+      if (result.ok && result.data) {
         const chats = result.data.map((chat) => ({
           ...chat,
           avatar: chat.avatar ? ResourcesController.getResourcePath(chat.avatar) : defaultAvatar.pathname,
@@ -92,13 +92,13 @@ export class ChatsController {
 
   public async getChatUsers(id: number, queries: Partial<GetChatUsersQueriesModel> = {}) {
     try {
-      const result = await chatsApi.getUsers(id, { offset: 0, limit: 5, ...queries });
+      const result = await chatsApi.getUsers<ChatUser[]>(id, { offset: 0, limit: 5, ...queries });
 
       if (result.status === 401) {
         store.state.auth.isAuth = false;
       }
 
-      if (result.ok) {
+      if (result.ok && result.data) {
         const chatUsers = result.data.reduce((acc, chatUser) => {
           if (chatUser.id !== store.state.auth.user.id) {
             acc.push({
@@ -109,7 +109,7 @@ export class ChatsController {
             });
           }
           return acc;
-        }, []);
+        }, [] as typeof result.data);
 
         store.state.chats.aboutChatUsers = chatUsers.length ? chatUsers : null;
 
@@ -154,14 +154,14 @@ export class ChatsController {
 
   public async getChatToken(chatId: number) {
     try {
-      const result = await chatsApi.getToken(chatId);
+      const result = await chatsApi.getToken<Record<string, string>>(chatId);
 
       if (result.status === 401) {
         store.state.auth.isAuth = false;
         return null;
       }
 
-      if (result.ok) {
+      if (result.ok && result.data) {
         store.state.chats.token = result.data.token;
         return result.data.token;
       }
@@ -196,7 +196,7 @@ export class ChatsController {
     }
   }
 
-  private onMessage(data, userId: number, chatId: number) {
+  private onMessage(data: Message[] | Message, userId: number, chatId: number) {
     if (!data) {
       return;
     }

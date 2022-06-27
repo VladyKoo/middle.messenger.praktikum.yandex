@@ -60,14 +60,14 @@ export class AuthController {
   public async getUser() {
     try {
       const { state } = store;
-      const result = await authApi.getUser();
+      const result = await authApi.getUser<User>();
 
       if (result.status === 401) {
         state.auth.isAuth = false;
       }
 
-      if (result.ok) {
-        const data = result.data as User;
+      if (result.ok && result.data) {
+        const { data } = result;
 
         state.auth.isAuth = true;
 

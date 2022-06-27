@@ -20,23 +20,23 @@ export class UserApi extends BaseAPI {
     super({ basePath: '/user' });
   }
 
-  public updateProfile(data: ProfileFormModel): Promise<FetchResponse> {
-    return this.put('/profile', { data });
+  public updateProfile<D>(data: ProfileFormModel): Promise<FetchResponse<D>> {
+    return this.put<D>('/profile', { data });
   }
 
-  public updateAvatar(data: FormData): Promise<FetchResponse> {
-    return this.put('/profile/avatar', { data, headers: {} });
+  public updateAvatar<D>(data: FormData): Promise<FetchResponse<D>> {
+    return this.put<D>('/profile/avatar', { data, headers: {} });
   }
 
-  public updatePassword(data: PasswordFormModel): Promise<FetchResponse> {
-    return this.put('/password', { data });
+  public updatePassword<D>(data: PasswordFormModel): Promise<FetchResponse<D>> {
+    return this.put<D>('/password', { data });
   }
 
-  public getUser(id: string): Promise<FetchResponse> {
-    return this.get(`/${id}`);
+  public getUser<D>(id: string): Promise<FetchResponse<D>> {
+    return this.get<D>(`/${id}`);
   }
 
-  public searchUser(login: string): Promise<FetchResponse> {
-    return this.post('/search', { data: { login } });
+  public searchUser<D>(login: string): Promise<FetchResponse<D>> {
+    return this.post<D>('/search', { data: { login } });
   }
 }

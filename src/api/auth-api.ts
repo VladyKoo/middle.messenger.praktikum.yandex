@@ -20,19 +20,19 @@ export class AuthApi extends BaseAPI {
     super({ basePath: '/auth' });
   }
 
-  public signin(data: SigninFormModel): Promise<FetchResponse> {
-    return this.post('/signin', { data });
+  public signin<D>(data: SigninFormModel): Promise<FetchResponse<D>> {
+    return this.post<D>('/signin', { data });
   }
 
-  public signup(data: SignupFormModel): Promise<FetchResponse> {
-    return this.post('/signup', { data });
+  public signup<D>(data: SignupFormModel): Promise<FetchResponse<D>> {
+    return this.post<D>('/signup', { data });
   }
 
-  public getUser(): Promise<FetchResponse> {
-    return this.get('/user');
+  public getUser<D>(): Promise<FetchResponse<D>> {
+    return this.get<D>('/user');
   }
 
-  public logout(): Promise<FetchResponse> {
-    return this.post('/logout', {});
+  public logout<D>(): Promise<FetchResponse<D>> {
+    return this.post<D>('/logout', {});
   }
 }

@@ -24,35 +24,35 @@ export class ChatsApi extends BaseAPI {
     super({ basePath: '/chats' });
   }
 
-  public getChats(queries: GetChatQueriesModel): Promise<FetchResponse> {
-    return this.get('/', queries);
+  public getChats<D>(queries: GetChatQueriesModel): Promise<FetchResponse<D>> {
+    return this.get<D>('/', queries);
   }
 
-  public createChat(title: string): Promise<FetchResponse> {
-    return this.post('/', { data: { title } });
+  public createChat<D>(title: string): Promise<FetchResponse<D>> {
+    return this.post<D>('/', { data: { title } });
   }
 
-  public deleteChat(chatId: number): Promise<FetchResponse> {
-    return this.delete('/', { data: { chatId } });
+  public deleteChat<D>(chatId: number): Promise<FetchResponse<D>> {
+    return this.delete<D>('/', { data: { chatId } });
   }
 
-  public updateAvatar(data: FormData): Promise<FetchResponse> {
-    return this.put('/avatar', { data, headers: {} });
+  public updateAvatar<D>(data: FormData): Promise<FetchResponse<D>> {
+    return this.put<D>('/avatar', { data, headers: {} });
   }
 
-  public getUsers(id: number, queries: GetChatUsersQueriesModel): Promise<FetchResponse> {
-    return this.get(`/${id}/users`, queries);
+  public getUsers<D>(id: number, queries: GetChatUsersQueriesModel): Promise<FetchResponse<D>> {
+    return this.get<D>(`/${id}/users`, queries);
   }
 
-  public addUsers(data: ChangeUsersInChatModel): Promise<FetchResponse> {
-    return this.put('/users', { data });
+  public addUsers<D>(data: ChangeUsersInChatModel): Promise<FetchResponse<D>> {
+    return this.put<D>('/users', { data });
   }
 
-  public deleteUsers(data: ChangeUsersInChatModel): Promise<FetchResponse> {
-    return this.delete('/users', { data });
+  public deleteUsers<D>(data: ChangeUsersInChatModel): Promise<FetchResponse<D>> {
+    return this.delete<D>('/users', { data });
   }
 
-  public getToken(id: number): Promise<FetchResponse> {
-    return this.post(`/token/${id}`, {});
+  public getToken<D>(id: number): Promise<FetchResponse<D>> {
+    return this.post<D>(`/token/${id}`, {});
   }
 }

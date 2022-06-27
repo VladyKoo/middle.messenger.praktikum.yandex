@@ -35,20 +35,20 @@ export class BaseAPI {
     return queryString;
   }
 
-  get(path, queries?: Record<string, unknown>, options?: FetchOptions): Promise<FetchResponse> {
-    return this.fetch.get(`${this.baseUrl}${this.basePath}${path}${this.queryStringify(queries)}`, options);
+  get<D>(path: string, queries?: Record<string, unknown>, options?: FetchOptions): Promise<FetchResponse<D>> {
+    return this.fetch.get<D>(`${this.baseUrl}${this.basePath}${path}${this.queryStringify(queries)}`, options);
   }
 
-  post(path, options: FetchOptions, queries?: Record<string, unknown>): Promise<FetchResponse> {
-    return this.fetch.post(`${this.baseUrl}${this.basePath}${path}${this.queryStringify(queries)}`, options);
+  post<D>(path: string, options: FetchOptions, queries?: Record<string, unknown>): Promise<FetchResponse<D>> {
+    return this.fetch.post<D>(`${this.baseUrl}${this.basePath}${path}${this.queryStringify(queries)}`, options);
   }
 
-  put(path, options: FetchOptions, queries?: Record<string, unknown>): Promise<FetchResponse> {
-    return this.fetch.put(`${this.baseUrl}${this.basePath}${path}${this.queryStringify(queries)}`, options);
+  put<D>(path: string, options: FetchOptions, queries?: Record<string, unknown>): Promise<FetchResponse<D>> {
+    return this.fetch.put<D>(`${this.baseUrl}${this.basePath}${path}${this.queryStringify(queries)}`, options);
   }
 
-  delete(path, options: FetchOptions, queries?: Record<string, unknown>): Promise<FetchResponse> {
-    return this.fetch.delete(
+  delete<D>(path: string, options: FetchOptions, queries?: Record<string, unknown>): Promise<FetchResponse<D>> {
+    return this.fetch.delete<D>(
       `${this.baseUrl}${this.basePath}${path}${this.queryStringify(queries)}`,
       options,
     );
