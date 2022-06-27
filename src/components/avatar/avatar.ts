@@ -5,7 +5,7 @@ import tmpl from './avatar.hbs';
 export type AvatarProps = {
   styles?: Record<string, string>;
   style?: string;
-  url: URL;
+  url?: URL | string;
   alt?: string;
 };
 

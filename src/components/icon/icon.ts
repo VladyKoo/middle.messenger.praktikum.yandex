@@ -18,4 +18,10 @@ export class Icon extends Block<IconProps> {
   render(): DocumentFragment {
     return this.compile(tmpl, { ...this.props });
   }
+
+  componentDidUpdate(oldProps: IconProps, newProps: IconProps) {
+    if (oldProps.icon !== newProps.icon) {
+      this.setProps({ pathData: getPathData(this.props.icon) });
+    }
+  }
 }

@@ -1,17 +1,19 @@
 import { Block } from '../../utils/Block';
 import { loginValidator, passwordValidator } from '../../utils/fieldValidators';
-import styles from './signin.module.scss';
-import tmpl from './signin.hbs';
-
-import { Link } from '../../components/link';
+import { AuthController } from '../../controllers/auth';
 import { Form } from '../../components/form';
 import { Input } from '../../components/input';
 import { Button } from '../../components/button';
+import { RouterLink } from '../../components/router-link';
+import styles from './signin.module.scss';
+import tmpl from './signin.hbs';
+
+const authController = new AuthController();
 
 export type SigninProps = {
   styles?: Record<string, string>;
   title?: string;
-  link?: Link;
+  link?: RouterLink;
   form?: Form;
 };
 
@@ -20,9 +22,10 @@ export class Signin extends Block<SigninProps> {
     super({
       styles,
       title: 'Sign In',
-      link: new Link({
-        name: 'Sign Up',
-        href: 'signup',
+      link: new RouterLink({
+        href: '/sign-up',
+        class: styles.link,
+        content: 'Sign Up',
       }),
       form: new Form({
         fields: [
@@ -54,19 +57,22 @@ export class Signin extends Block<SigninProps> {
 
   handleSubmit(e: Event) {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const formData = new FormData(form);
 
-    console.log(Object.fromEntries(formData));
-
-    const fields = this.children.form.props.fields as Input[];
-
+    const fields = this.children.form?.props.fields as Input[];
     const isValide = fields.reduce((acc, field) => {
       field.validate();
       return field.props.error ? false : acc;
     }, true);
 
-    console.log(isValide);
+    if (!isValide) {
+      return;
+    }
+
+    const formData = new FormData(e.target as HTMLFormElement);
+
+    const data = Object.fromEntries(formData);
+
+    authController.signin(data);
   }
 
   render(): DocumentFragment {

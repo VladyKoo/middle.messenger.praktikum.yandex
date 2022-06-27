@@ -1,0 +1,45 @@
+@import '../../../static/styles/var';
+
+.box {
+  width: 100%;
+}
+
+.item {
+  min-width: 100px;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.437);
+  font-weight: 600;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &.error {
+    color: #920000;
+  }
+
+  &.warning {
+    color: yellow;
+  }
+
+  &.success {
+    color: #00ff00;
+  }
+}
+
+.close-btn {
+  padding: 3px;
+  border-radius: 2px;
+  color: #fff;
+  margin-left: 20px;
+  
+  &:hover {
+    transform: scale(1.2);
+  }
+}

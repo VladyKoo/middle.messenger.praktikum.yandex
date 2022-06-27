@@ -1,25 +1,26 @@
 <div class='{{styles.box}}'>
   <div class='{{styles.top-box}}'>
-    <a class='{{styles.top-icon}}' href='/profile'>
-      {{{arrowLeftIcon}}}
-    </a>
+    {{{backLink}}}
     <span class='{{styles.top-title}}'>Edit Profile</span>
   </div>
   <div class='{{styles.content-box}} hide-scroll'>
     <div class='{{styles.avatar-box}}'>
-      <button class='{{styles.avatar-btn}}'>
-        <div class='{{styles.avatar}}'>
-          {{{avatar}}}
-        </div>
-        <div class='{{styles.add-photo}}'>
-          {{{addPhotoIcon}}}
-        </div>
-      </button>
+      <div class='{{styles.avatar}}'>
+        {{{changeAvatar}}}
+      </div>
     </div>
     <div class='{{styles.settings-box}}'>
       <div class='{{styles.settings-title}}'>Settings</div>
-      {{{form}}}
+      {{{settingsForm}}}
     </div>
-
+    <div class='{{styles.settings-box}}'>
+      <div class='{{styles.settings-title}}'>Password</div>
+      {{{passwordForm}}}
+    </div>
+    <div class='{{styles.settings-box}}'>
+      <div class='{{styles.logout-btn}}'>
+        {{{logout}}}
+      </div>
+    </div>
   </div>
 </div>

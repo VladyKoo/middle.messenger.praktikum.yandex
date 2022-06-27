@@ -1,60 +1,105 @@
 import { Block } from '../../../../../../utils/Block';
+import { Avatar } from '../../../../../../components/avatar';
+import { Search } from '../../../../../../components/search';
+import { ChatItem } from '../../../../../../components/chat-item';
+import { RouterLink } from '../../../../../../components/router-link';
+import { CreateChat } from './modules/create-chat';
+import { store, State, Chat } from '../../../../../../store';
+import { deepCompare } from '../../../../../../utils';
+import { ChatsController } from '../../../../../../controllers/chats';
 import styles from './chats.module.scss';
 import tmpl from './chats.hbs';
 
-import { Avatar } from '../../../../../../components/avatar';
-import { Search } from '../../../../../../components/search';
-import { Icon } from '../../../../../../components/icon';
-import { ChatItem } from './modules/chat-item';
+const chatsController = new ChatsController();
 
-function getFakeChatItems() {
-  const avatarUrl = new URL('../../../../../../assets/images/avatar.png', import.meta.url);
-  const items = [];
-
-  function getRandomNum(end = 1, start = 0) {
-    return Math.trunc(Math.random() * (end - start) + start);
-  }
-
-  for (let i = 0; i < 10; i += 1) {
-    items.push(
+function getChats(chats: Chat[]): ChatItem[] {
+  return chats.map(
+    (chat) =>
       new ChatItem({
-        avatarUrl,
-        id: `${i}`,
-        surname: 'Surname',
-        name: 'Name',
-        lastMessage: 'Message',
-        time: '2020-01-02T14:22:22.000Z',
-        counter: getRandomNum(200),
+        avatar: chat.avatar,
+        id: chat.id,
+        title: chat.title,
+        lastMessage: chat.last_message ? chat.last_message.content : '',
+        time: chat.last_message ? chat.last_message.time : '',
+        counter: chat.unread_count,
+        handleClick: () => {
+          if (store.state.chats.activeChat && store.state.chats.activeChat.id === chat.id) {
+            return;
+          }
+
+          store.state.chats.activeChat = chat;
+
+          if (store.state.chats.aboutChat) {
+            store.state.chats.aboutChat = chat;
+          }
+
+          chatsController.getChatUsers(chat.id).then((data) => {
+            const userId = store.state.auth.user.id;
+            if (data.length && userId) {
+              chatsController.openLiveChat(userId, chat.id);
+            } else {
+              chatsController.closeLiveChat();
+              store.state.chats.messages = [];
+            }
+          });
+        },
       }),
-    );
-  }
-  return items;
+  );
+}
+
+function mapStateToProps(state: State) {
+  return {
+    avatar: state.auth.user.avatar,
+    chats: state.chats.chats,
+  };
 }
 
 export type ChatsProps = {
   styles?: Record<string, string>;
-  avatarUrl: URL;
+  avatar?: string;
   chatItems?: ChatItem[];
-  newChatIcon?: Icon;
-  moreIcon?: Icon;
-  avatar?: Avatar;
+  createChat?: CreateChat;
+  chats?: Chat[];
   search?: Search;
+  link?: RouterLink;
 };
 
 export class Chats extends Block<ChatsProps> {
-  constructor(props: ChatsProps) {
+  constructor(props: ChatsProps = {}) {
+    let state = mapStateToProps(store.state);
+    const propsAndState = { ...props, ...state };
+
     super({
       styles,
-      newChatIcon: new Icon({ icon: 'new-chat' }),
-      moreIcon: new Icon({ icon: 'more' }),
-      avatar: new Avatar({ url: props.avatarUrl }),
+      createChat: new CreateChat(),
       search: new Search({}),
-      chatItems: getFakeChatItems(),
-      ...props,
+      chatItems: getChats(propsAndState.chats),
+      link: new RouterLink({
+        href: '/profile',
+        class: styles['top-avatar'],
+        content: new Avatar({ url: propsAndState.avatar }),
+      }),
+      ...propsAndState,
+    });
+
+    store.subscribe(() => {
+      const newState = mapStateToProps(store.state);
+
+      if (!deepCompare(state, newState)) {
+        this.setProps({ ...newState, chatItems: getChats(newState.chats) });
+      }
+
+      state = newState;
     });
   }
 
   render(): DocumentFragment {
     return this.compile(tmpl, { ...this.props });
+  }
+
+  componentDidUpdate() {
+    if (typeof this.children.link?.props?.content === 'object') {
+      this.children.link?.props?.content?.setProps({ url: this.props.avatar });
+    }
   }
 }

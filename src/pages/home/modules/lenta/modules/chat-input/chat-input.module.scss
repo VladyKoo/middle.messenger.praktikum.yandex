@@ -1,5 +1,11 @@
 @import '../../../../../../../static/styles/var';
 
+@mixin icon {
+  width: 24px;
+  height: 24px;
+  margin: 5px 0;
+}
+
 .box {
   padding: 5px 15px;
   border-radius: 8px;
@@ -16,14 +22,14 @@
   display: flex;
 }
 
-.icon {
-  width: 24px;
-  height: 24px;
-  margin: 5px 0;
+.smile-icon {
+  @include icon;
+
+  margin-right: 10px;
 }
 
-.smile {
-  margin-right: 10px;
+.attachment-icon {
+  @include icon;
 }
 
 .input {
@@ -34,11 +40,17 @@
   padding: 0 12px;
   overflow: hidden;
 
-  &:empty:before {
+  &:empty::before {
     content: attr(data-placeholder);
   }
 }
 
-.delete {
+.delete-icon {
+  @include icon;
+
   margin-right: 10px;
+}
+
+.send-icon {
+  @include icon;
 }

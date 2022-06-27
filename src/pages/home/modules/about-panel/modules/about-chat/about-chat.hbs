@@ -1,0 +1,34 @@
+<div class='{{styles.box}}'>
+  <div class='{{styles.top-box}}'>
+    <button class='{{styles.top-close-btn}}'>
+      {{{closeIcon}}}
+    </button>
+    <span class='{{styles.top-title}}'>Chat info</span>
+  </div>
+  <div class='{{styles.content-box}} hide-scroll'>
+    <div class='{{styles.avatar-box}}'>
+      <div class='{{styles.avatar}}'>
+        {{{changeAvatar}}}
+      </div>
+    </div>
+    {{#if chatUserItems}}
+      <div class='{{styles.settings-box}}'>
+        <span class='{{styles.settings-title}}'>Chat users</span>
+        {{#each chatUserItems}}
+          {{{this}}}
+        {{/each}}
+      </div>
+    {{/if}}
+    <div class='{{styles.settings-box}}'>
+      <span class='{{styles.settings-title}}'>Add user to chat</span>
+      <div class='{{styles.add-input}}'>
+        {{{addUserInput}}}
+      </div>
+    </div>
+    <div class='{{styles.settings-box}}'>
+      <div class='{{styles.btn-box}}'>
+        {{{deleteChat}}}
+      </div>
+    </div>
+  </div>
+</div>

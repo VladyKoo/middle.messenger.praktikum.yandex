@@ -21,12 +21,6 @@
     height: 40px;
   }
 
-  .top-btns {
-    display: flex;
-    align-items: center;
-    min-width: 64px;
-  }
-
   .search {
     height: 40px;
   }
@@ -38,11 +32,17 @@
   }
 }
 
-.content-box {
+.content-container {
   width: 100%;
   height: calc(100% - 64px);
   background-color: $lenta-bg-color;
   padding: 0 24px 24px;
+}
+
+.content-box {
+  width: calc(100% - 15vw);
+  height: 100%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
 }
@@ -51,4 +51,8 @@
   width: 100%;
   flex-grow: 1;
   overflow-y: auto;
+}
+
+.messages {
+  padding-top: 10px;
 }

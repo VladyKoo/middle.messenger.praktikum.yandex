@@ -14,7 +14,10 @@ export class Form extends Block<FormProps> {
     super({ styles, ...props }, 'form');
   }
 
-  addEvents(): () => void {
+  addEvents(): (() => void) | void {
+    if (!this._element) {
+      return;
+    }
     const form = this._element;
     form.addEventListener('submit', this.props.handleSubmit);
 

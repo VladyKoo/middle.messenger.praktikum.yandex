@@ -1,0 +1,8 @@
+<div class='{{styles.box}}'>
+  {{#each messages}}
+    <div class='{{../styles.item}} {{lookup ../styles this.type}}' >
+      {{this.value}}
+      <button class='{{../styles.close-btn}}' data-index="{{@index}}">x</button>
+    </div>
+  {{/each}}
+</div>

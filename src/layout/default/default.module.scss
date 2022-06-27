@@ -12,3 +12,9 @@
   background-color: $body-bg-color;
   flex: 1;
 }
+
+.notify {
+  position: fixed;
+  bottom: 10px;
+  left: 50px;
+}
