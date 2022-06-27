@@ -1,9 +1,10 @@
+import { Block } from './Block';
 import { createRoot, Root } from './createRoot';
 
 export type Route = {
   path: string;
-  component: new (...args: any[]) => any;
-  props?: any;
+  component: new (props: Record<string, unknown>) => Block;
+  props?: Record<string, unknown>;
   name?: string;
   children?: Route[];
 };
@@ -69,6 +70,10 @@ export class Router {
   }
 
   public go(path: string | number) {
+    if (path === this.getPath()) {
+      return;
+    }
+
     if (typeof path === 'number') {
       this.history.go(path);
     } else {

@@ -1,4 +1,4 @@
-import { store, Chat, ChatUser, Message } from '../store';
+import { store, Chat, ChatUser, Message, addNotify } from '../store';
 import { ResourcesController } from './resources';
 import {
   ChatsApi,
@@ -40,6 +40,8 @@ export class ChatsController {
       }
     } catch (error) {
       console.error(error);
+
+      addNotify('Something went wrong');
     }
   }
 
@@ -56,6 +58,8 @@ export class ChatsController {
       }
     } catch (error) {
       console.error(error);
+
+      addNotify('Something went wrong');
     }
   }
 
@@ -72,6 +76,8 @@ export class ChatsController {
       }
     } catch (error) {
       console.error(error);
+
+      addNotify('Something went wrong');
     }
   }
 
@@ -88,6 +94,8 @@ export class ChatsController {
       }
     } catch (error) {
       console.error(error);
+
+      addNotify('Something went wrong');
     }
   }
 
@@ -118,6 +126,7 @@ export class ChatsController {
       }
     } catch (error) {
       console.error(error);
+      addNotify('Something went wrong');
     }
   }
 
@@ -134,6 +143,7 @@ export class ChatsController {
       }
     } catch (error) {
       console.error(error);
+      addNotify('Something went wrong');
     }
   }
 
@@ -150,6 +160,7 @@ export class ChatsController {
       }
     } catch (error) {
       console.error(error);
+      addNotify('Something went wrong');
     }
   }
 
@@ -168,6 +179,9 @@ export class ChatsController {
       }
     } catch (error) {
       console.error(error);
+
+      addNotify('Something went wrong');
+
       return null;
     }
   }
@@ -187,6 +201,8 @@ export class ChatsController {
       this.getLiveMessages();
     } catch (error) {
       console.error(error);
+
+      addNotify('Something went wrong');
     }
   }
 
@@ -195,6 +211,8 @@ export class ChatsController {
       webSocketApi.disconect();
     } catch (error) {
       console.error(error);
+
+      addNotify('Something went wrong');
     }
   }
 
@@ -232,6 +250,8 @@ export class ChatsController {
       webSocketApi.getMessages(0);
     } catch (error) {
       console.error(error);
+
+      addNotify('Something went wrong');
     }
   }
 
@@ -240,6 +260,8 @@ export class ChatsController {
       webSocketApi.sendMessage({ content: message });
     } catch (error) {
       console.error(error);
+
+      addNotify('Something went wrong');
     }
   }
 }

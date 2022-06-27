@@ -1,4 +1,4 @@
-import { store, User } from '../store';
+import { store, User, addNotify } from '../store';
 import { ResourcesController } from './resources';
 import { UserApi, ProfileFormModel, PasswordFormModel } from '../api/user-api';
 import { StatusCode } from '../utils/enums/statusCodeEnum';
@@ -24,9 +24,12 @@ export class UserController {
         state.auth.user.login = data.login || '';
         state.auth.user.email = data.email || '';
         state.auth.user.phone = data.phone || '';
+
+        addNotify('Profile changed', 'success');
       }
     } catch (error) {
       console.error(error);
+      addNotify('Something went wrong');
     }
   }
 
@@ -37,8 +40,13 @@ export class UserController {
       if (result.status === StatusCode.ClientErrorUnauthorized) {
         store.state.auth.isAuth = false;
       }
+
+      if (result.ok) {
+        addNotify('Password changed', 'success');
+      }
     } catch (error) {
       console.error(error);
+      addNotify('Something went wrong');
     }
   }
 
@@ -52,9 +60,11 @@ export class UserController {
 
       if (result.ok && result.data) {
         store.state.auth.user.avatar = ResourcesController.getResourcePath(result.data.avatar);
+        addNotify('Avatar changed', 'success');
       }
     } catch (error) {
       console.error(error);
+      addNotify('Something went wrong');
     }
   }
 
@@ -71,6 +81,7 @@ export class UserController {
       }
     } catch (error) {
       console.error(error);
+      addNotify('Something went wrong');
     }
   }
 }

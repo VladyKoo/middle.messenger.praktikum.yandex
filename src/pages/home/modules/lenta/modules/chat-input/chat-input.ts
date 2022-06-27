@@ -3,6 +3,7 @@ import { Icon } from '../../../../../../components/icon';
 import { ChatsController } from '../../../../../../controllers/chats';
 import { debounce } from '../../../../../../utils';
 import { KeyboardKey } from '../../../../../../utils/enums/keyboardKeyEnum';
+import { store, addNotify } from '../../../../../../store';
 import styles from './chat-input.module.scss';
 import tmpl from './chat-input.hbs';
 
@@ -45,6 +46,11 @@ export class ChatInput extends Block<ChatInputProps> {
 
     const onSend = () => {
       let value = '';
+
+      if (!store.state.chats.aboutChatUsers?.length) {
+        addNotify('You must add the user to the chat!');
+        return;
+      }
 
       input.childNodes.forEach((node, idx, parent) => {
         const newLine = idx === parent.length - 1 ? '' : '\n';

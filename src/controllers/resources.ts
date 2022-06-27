@@ -1,4 +1,4 @@
-import { store } from '../store';
+import { store, addNotify } from '../store';
 import { ResourcesApi } from '../api/resources-api';
 import { StatusCode } from '../utils/enums/statusCodeEnum';
 
@@ -14,6 +14,7 @@ export class ResourcesController {
       }
     } catch (error) {
       console.error(error);
+      addNotify('Something went wrong');
     }
   }
 
@@ -30,6 +31,7 @@ export class ResourcesController {
       }
     } catch (error) {
       console.error(error);
+      addNotify('Something went wrong');
     }
   }
 }

@@ -1,5 +1,5 @@
 import { router } from '../router';
-import { store, User } from '../store';
+import { store, User, addNotify } from '../store';
 import { ResourcesController } from './resources';
 import { AuthApi, SigninFormModel, SignupFormModel } from '../api/auth-api';
 import { StatusCode } from '../utils/enums/statusCodeEnum';
@@ -21,6 +21,8 @@ export class AuthController {
       }
     } catch (error) {
       console.error(error);
+
+      addNotify('Something went wrong');
     }
   }
 
@@ -38,6 +40,8 @@ export class AuthController {
       }
     } catch (error) {
       console.error(error);
+
+      addNotify('Something went wrong');
     }
   }
 
@@ -55,6 +59,8 @@ export class AuthController {
       }
     } catch (error) {
       console.error(error);
+
+      addNotify('Something went wrong');
     }
   }
 
@@ -87,6 +93,8 @@ export class AuthController {
       }
     } catch (error) {
       console.error(error);
+
+      addNotify('Something went wrong');
     }
   }
 }

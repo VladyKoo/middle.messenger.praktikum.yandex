@@ -109,7 +109,9 @@ export class AboutChat extends Block<AboutChatProps> {
       return;
     }
     userController.searchUser(value).then((data) => {
-      const { id } = data?.[0] || {};
+      const firstUser = 0;
+
+      const { id } = data?.[firstUser] || {};
       if (id && this.props.chatId) {
         chatsController.addUsersToChat({ chatId: this.props.chatId, users: [id] });
         target.value = '';

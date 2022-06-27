@@ -66,11 +66,19 @@ export type Users = {
   aboutUser: ChatUser | null;
 };
 
+export type NotifyItemType = 'error' | 'warning' | 'success'
+
+export type NotifyItem = {
+  value: string;
+  type: NotifyItemType;
+};
+
 export type State = {
   users: Users;
   auth: Auth;
   chats: Chats;
   baseUrl: string;
+  notify: NotifyItem[];
 };
 
 const initState: State = {
@@ -99,6 +107,11 @@ const initState: State = {
     token: null,
   },
   baseUrl: 'https://ya-praktikum.tech/api/v2',
+  notify: [],
 };
 
 export const store = new Store<State>(initState);
+
+export const addNotify = (value: string, type: NotifyItemType = 'error') => {
+  store.state.notify = [...store.state.notify, { value, type }];
+};
