@@ -7,6 +7,7 @@ import {
   GetChatUsersQueriesModel,
 } from '../api/chats-api';
 import { WebSocketApi } from '../api/websocket-api';
+import { StatusCode } from '../utils/enums/statusCodeEnum';
 
 const defaultAvatar = new URL('../assets/images/avatar.png', import.meta.url);
 
@@ -18,7 +19,7 @@ export class ChatsController {
     try {
       const result = await chatsApi.getChats<Chat[]>({ offset: 0, limit: 20, ...queries });
 
-      if (result.status === 401) {
+      if (result.status === StatusCode.ClientErrorUnauthorized) {
         store.state.auth.isAuth = false;
       }
 
@@ -46,7 +47,7 @@ export class ChatsController {
     try {
       const result = await chatsApi.createChat(title);
 
-      if (result.status === 401) {
+      if (result.status === StatusCode.ClientErrorUnauthorized) {
         store.state.auth.isAuth = false;
       }
 
@@ -62,7 +63,7 @@ export class ChatsController {
     try {
       const result = await chatsApi.deleteChat(chatId);
 
-      if (result.status === 401) {
+      if (result.status === StatusCode.ClientErrorUnauthorized) {
         store.state.auth.isAuth = false;
       }
 
@@ -78,7 +79,7 @@ export class ChatsController {
     try {
       const result = await chatsApi.updateAvatar(payload);
 
-      if (result.status === 401) {
+      if (result.status === StatusCode.ClientErrorUnauthorized) {
         store.state.auth.isAuth = false;
       }
 
@@ -94,7 +95,7 @@ export class ChatsController {
     try {
       const result = await chatsApi.getUsers<ChatUser[]>(id, { offset: 0, limit: 5, ...queries });
 
-      if (result.status === 401) {
+      if (result.status === StatusCode.ClientErrorUnauthorized) {
         store.state.auth.isAuth = false;
       }
 
@@ -124,7 +125,7 @@ export class ChatsController {
     try {
       const result = await chatsApi.addUsers(payload);
 
-      if (result.status === 401) {
+      if (result.status === StatusCode.ClientErrorUnauthorized) {
         store.state.auth.isAuth = false;
       }
 
@@ -140,7 +141,7 @@ export class ChatsController {
     try {
       const result = await chatsApi.deleteUsers(payload);
 
-      if (result.status === 401) {
+      if (result.status === StatusCode.ClientErrorUnauthorized) {
         store.state.auth.isAuth = false;
       }
 
@@ -156,7 +157,7 @@ export class ChatsController {
     try {
       const result = await chatsApi.getToken<Record<string, string>>(chatId);
 
-      if (result.status === 401) {
+      if (result.status === StatusCode.ClientErrorUnauthorized) {
         store.state.auth.isAuth = false;
         return null;
       }
@@ -178,6 +179,7 @@ export class ChatsController {
       if (!token) {
         return;
       }
+
       await webSocketApi.connect(userId, chatId, token);
 
       webSocketApi.onMessage = (data) => this.onMessage(data, userId, chatId);
@@ -222,8 +224,6 @@ export class ChatsController {
       };
 
       store.state.chats.messages = [message, ...store.state.chats.messages];
-    } else if (data.type === 'user connected') {
-      // console.log('user connected');
     }
   }
 

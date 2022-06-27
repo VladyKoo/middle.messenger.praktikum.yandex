@@ -2,6 +2,7 @@ import { router } from '../router';
 import { store, User } from '../store';
 import { ResourcesController } from './resources';
 import { AuthApi, SigninFormModel, SignupFormModel } from '../api/auth-api';
+import { StatusCode } from '../utils/enums/statusCodeEnum';
 
 const authApi = new AuthApi();
 
@@ -10,7 +11,7 @@ export class AuthController {
     try {
       const result = await authApi.signin(payload);
 
-      if (result.status === 401) {
+      if (result.status === StatusCode.ClientErrorUnauthorized) {
         store.state.auth.isAuth = false;
       }
 
@@ -27,7 +28,7 @@ export class AuthController {
     try {
       const result = await authApi.signup(payload);
 
-      if (result.status === 401) {
+      if (result.status === StatusCode.ClientErrorUnauthorized) {
         store.state.auth.isAuth = false;
       }
 
@@ -44,7 +45,7 @@ export class AuthController {
     try {
       const result = await authApi.logout();
 
-      if (result.status === 401) {
+      if (result.status === StatusCode.ClientErrorUnauthorized) {
         store.state.auth.isAuth = false;
       }
 
@@ -62,7 +63,7 @@ export class AuthController {
       const { state } = store;
       const result = await authApi.getUser<User>();
 
-      if (result.status === 401) {
+      if (result.status === StatusCode.ClientErrorUnauthorized) {
         state.auth.isAuth = false;
       }
 

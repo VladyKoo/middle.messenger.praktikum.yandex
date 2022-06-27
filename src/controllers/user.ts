@@ -1,6 +1,7 @@
 import { store, User } from '../store';
 import { ResourcesController } from './resources';
 import { UserApi, ProfileFormModel, PasswordFormModel } from '../api/user-api';
+import { StatusCode } from '../utils/enums/statusCodeEnum';
 
 const userApi = new UserApi();
 
@@ -10,7 +11,7 @@ export class UserController {
       const { state } = store;
       const result = await userApi.updateProfile<User>(payload);
 
-      if (result.status === 401) {
+      if (result.status === StatusCode.ClientErrorUnauthorized) {
         state.auth.isAuth = false;
       }
 
@@ -33,7 +34,7 @@ export class UserController {
     try {
       const result = await userApi.updatePassword(payload);
 
-      if (result.status === 401) {
+      if (result.status === StatusCode.ClientErrorUnauthorized) {
         store.state.auth.isAuth = false;
       }
     } catch (error) {
@@ -45,7 +46,7 @@ export class UserController {
     try {
       const result = await userApi.updateAvatar<Pick<User, 'avatar'>>(payload);
 
-      if (result.status === 401) {
+      if (result.status === StatusCode.ClientErrorUnauthorized) {
         store.state.auth.isAuth = false;
       }
 
@@ -61,7 +62,7 @@ export class UserController {
     try {
       const result = await userApi.searchUser<User[]>(login);
 
-      if (result.status === 401) {
+      if (result.status === StatusCode.ClientErrorUnauthorized) {
         store.state.auth.isAuth = false;
       }
 

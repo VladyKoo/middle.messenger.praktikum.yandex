@@ -1,5 +1,6 @@
 import { store } from '../store';
 import { ResourcesApi } from '../api/resources-api';
+import { StatusCode } from '../utils/enums/statusCodeEnum';
 
 const resourcesApi = new ResourcesApi();
 
@@ -8,7 +9,7 @@ export class ResourcesController {
     try {
       const result = await resourcesApi.getResource(path);
 
-      if (result.status === 401) {
+      if (result.status === StatusCode.ClientErrorUnauthorized) {
         store.state.auth.isAuth = false;
       }
     } catch (error) {
@@ -24,7 +25,7 @@ export class ResourcesController {
     try {
       const result = await resourcesApi.updateResource(payload);
 
-      if (result.status === 401) {
+      if (result.status === StatusCode.ClientErrorUnauthorized) {
         store.state.auth.isAuth = false;
       }
     } catch (error) {

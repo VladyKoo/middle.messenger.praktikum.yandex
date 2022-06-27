@@ -1,6 +1,7 @@
 import { ChatsController } from '../../../../../../../../controllers/chats';
 import { Block } from '../../../../../../../../utils/Block';
 import { Icon } from '../../../../../../../../components/icon';
+import { KeyboardKey } from '../../../../../../../../utils/enums/keyboardKeyEnum';
 import styles from './create-chat.module.scss';
 import tmpl from './create-chat.hbs';
 
@@ -42,7 +43,7 @@ export class CreateChat extends Block<CreateChatProps> {
     };
 
     const onEnter = (e: KeyboardEvent) => {
-      if (e.key === 'Enter') {
+      if (e.key === KeyboardKey.Enter) {
         const value = (e.target as HTMLInputElement).value.trim();
         if (value) {
           chatsController.createChat(value);

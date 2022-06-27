@@ -1,5 +1,6 @@
 import { Block } from '../../utils/Block';
 import type { Validator } from '../../utils/fieldValidators';
+import { KeyboardKey } from '../../utils/enums/keyboardKeyEnum';
 import styles from './input.module.scss';
 import tmpl from './input.hbs';
 
@@ -71,7 +72,7 @@ export class Input extends Block<InputProps> {
     };
 
     const handleEnter = (e: KeyboardEvent) => {
-      if (e.key === 'Enter' && onEnter) {
+      if (e.key === KeyboardKey.Enter && onEnter) {
         onEnter(e);
       }
     };

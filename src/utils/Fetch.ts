@@ -1,15 +1,7 @@
-export enum METHOD {
-  GET = 'GET',
-  POST = 'POST',
-  PUT = 'PUT',
-  PATCH = 'PATCH',
-  DELETE = 'DELETE',
-}
-
-type Methods = keyof typeof METHOD;
+import { HttpMethod } from './enums/httpMethodEnum';
 
 export type FetchOptions = {
-  method?: Methods;
+  method?: keyof typeof HttpMethod;
   data?: any;
   baseUrl?: string;
   headers?: Record<string, string>;
@@ -19,40 +11,40 @@ export type FetchOptions = {
 
 export type OptionsWithoutMethod = Omit<FetchOptions, 'method'>;
 
-export type FetchResponse = {
+export type FetchResponse<D = unknown> = {
   status: number;
   ok: boolean;
-  data?: any;
+  data?: D;
 };
 
 export class Fetch {
   options: FetchOptions;
 
   constructor(options: FetchOptions = {}) {
-    this.options = { method: METHOD.GET, ...options };
+    this.options = { method: HttpMethod.GET, ...options };
   }
 
-  public get(url: string, options: OptionsWithoutMethod = {}): Promise<FetchResponse> {
-    return this.request(url, { ...options, method: METHOD.GET });
+  public get<D>(url: string, options: OptionsWithoutMethod = {}): Promise<FetchResponse<D>> {
+    return this.request<D>(url, { ...options, method: HttpMethod.GET });
   }
 
-  public post(url: string, options: OptionsWithoutMethod = {}): Promise<FetchResponse> {
-    return this.request(url, { ...options, method: METHOD.POST });
+  public post<D>(url: string, options: OptionsWithoutMethod = {}): Promise<FetchResponse<D>> {
+    return this.request<D>(url, { ...options, method: HttpMethod.POST });
   }
 
-  public put(url: string, options: OptionsWithoutMethod = {}): Promise<FetchResponse> {
-    return this.request(url, { ...options, method: METHOD.PUT });
+  public put<D>(url: string, options: OptionsWithoutMethod = {}): Promise<FetchResponse<D>> {
+    return this.request<D>(url, { ...options, method: HttpMethod.PUT });
   }
 
-  public patch(url: string, options: OptionsWithoutMethod = {}): Promise<FetchResponse> {
-    return this.request(url, { ...options, method: METHOD.PATCH });
+  public patch<D>(url: string, options: OptionsWithoutMethod = {}): Promise<FetchResponse<D>> {
+    return this.request<D>(url, { ...options, method: HttpMethod.PATCH });
   }
 
-  public delete(url: string, options: OptionsWithoutMethod = {}): Promise<FetchResponse> {
-    return this.request(url, { ...options, method: METHOD.DELETE });
+  public delete<D>(url: string, options: OptionsWithoutMethod = {}): Promise<FetchResponse<D>> {
+    return this.request<D>(url, { ...options, method: HttpMethod.DELETE });
   }
 
-  public request(url: string, options: FetchOptions = {}): Promise<FetchResponse> {
+  public request<D>(url: string, options: FetchOptions = {}): Promise<FetchResponse<D>> {
     this.options = { ...this.options, ...options };
 
     return new Promise((resolve, reject) => {
@@ -87,7 +79,7 @@ export class Fetch {
       xhr.onerror = handleError;
       xhr.ontimeout = handleError;
 
-      if (method === METHOD.GET || data === undefined) {
+      if (method === HttpMethod.GET || data === undefined) {
         xhr.send();
       } else {
         const body = data instanceof FormData ? data : JSON.stringify(data);

@@ -2,6 +2,7 @@ import { Block } from '../../../../../../utils/Block';
 import { Icon } from '../../../../../../components/icon';
 import { ChatsController } from '../../../../../../controllers/chats';
 import { debounce } from '../../../../../../utils';
+import { KeyboardKey } from '../../../../../../utils/enums/keyboardKeyEnum';
 import styles from './chat-input.module.scss';
 import tmpl from './chat-input.hbs';
 
@@ -57,7 +58,7 @@ export class ChatInput extends Block<ChatInputProps> {
     };
 
     const onEnter = (e: KeyboardEvent) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
+      if (e.key === KeyboardKey.Enter && !e.shiftKey) {
         onSend();
       }
     };
