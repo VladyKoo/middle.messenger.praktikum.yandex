@@ -4,7 +4,8 @@
 ![Netlify](https://img.shields.io/netlify/554ea957-1d9d-4508-b338-048d87b0ab24)
 ![GitHub repo size](https://img.shields.io/github/repo-size/VladyKoo/middle.messenger.praktikum.yandex)
 
-Messenger using only JavaScript, Typescript, CSS, and APIs.
+Messenger using only JavaScript, Typescript.
+
 The project will include standard chat functions:
 * **Registration**
 * **Authorization**
@@ -28,5 +29,18 @@ $ npm run build
 $ npm run start
 ```
 
-# Pull Requests
-https://github.com/VladyKoo/middle.messenger.praktikum.yandex/pull/2
+Project contains tests. For testing using mocha and chai. Tests cover utils classes.
+
+Also the project includes linters, eslint for javascript and typescript and stylelint for scss
+
+## Testing, linting
+```bash
+# run tests
+$ npm test
+
+# run eslint
+$ npm run lint
+
+# run stylelint
+$ npm run stylelint
+```
