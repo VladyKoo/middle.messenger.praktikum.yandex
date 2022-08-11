@@ -1,18 +1,18 @@
 <div class='{{styles.box}}'>
   <div class='{{styles.left-icons}}'>
-    <button class='{{styles.icon}} {{styles.smile}}'>
+    <button class='{{styles.smile-icon}}'>
       {{{smileIcon}}}
     </button>
-    <button class='{{styles.icon}} {{styles.attachment}}'>
+    <button class='{{styles.attachment-icon}}'>
       {{{attachmentIcon}}}
     </button>
   </div>
-  <div class='{{styles.input}}' contenteditable='true' data-placeholder='{{placeholder}}'></div>
+  <div class='{{styles.input}}' contenteditable='true' data-placeholder='{{placeholder}}'>{{value}}</div>
   <div class='{{styles.right-icons}}'>
-    <button class='{{styles.icon}} {{styles.delete}}'>
+    <button class='{{styles.delete-icon}}'>
       {{{deleteIcon}}}
     </button>
-    <button class='{{styles.icon}} {{styles.send}}'>
+    <button class='{{styles.send-icon}}'>
       {{{sendIcon}}}
     </button>
   </div>

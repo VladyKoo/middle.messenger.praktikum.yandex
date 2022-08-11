@@ -4,7 +4,8 @@
   "plugins": ["@typescript-eslint"],
   "globals": {
     "window": "readonly",
-    "document": "readonly"
+    "document": "readonly",
+    "global": "readonly"
   },
   "rules": {
     "no-undef": "off",
@@ -18,6 +19,12 @@
     "import/prefer-default-export": "off",
     "max-len": "off",
     "no-underscore-dangle": "off",
-    "class-methods-use-this": "off"
+    "class-methods-use-this": "off",
+    "consistent-return": "off",
+    "new-cap": "off",
+    "operator-linebreak": "off",
+    "import/no-extraneous-dependencies": "off",
+    "no-unused-expressions": "off",
+    "max-classes-per-file": "off"
   }
 }

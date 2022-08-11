@@ -2,7 +2,9 @@
 
 .container {
   width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 7px;
+  display: flex;
+  flex-direction: column;
 }
 
 .date {
@@ -22,11 +24,14 @@
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
+  margin-right: auto;
   color: $sent-message-color;
+  display: flex;
 
   &.right {
     background-color: $received-message-bg-color;
     margin-left: auto;
+    margin-right: 0;
     color: $received-message-color;
   }
 
@@ -37,7 +42,8 @@
 }
 
 .content {
-  padding: 15px 15px 0;
+  padding: 5px 10px;
+  white-space: pre-wrap;
 
   &.image {
     padding: 0;
@@ -57,7 +63,7 @@
 
 .time-box {
   display: flex;
-  justify-content: flex-end;
+  align-items: flex-end;
   padding-right: 5px;
 }
 

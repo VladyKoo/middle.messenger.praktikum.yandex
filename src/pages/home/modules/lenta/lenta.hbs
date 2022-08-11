@@ -2,27 +2,24 @@
   {{#if show}}
     <div class='{{styles.top-box}}'>
       <button class='{{styles.top-avatar}}'>
-        {{{avatar}}}
+        {{{avatarImg}}}
       </button>
-      <div class='{{styles.top-btns}}'>
-        <div class='{{styles.search}}'>
-          {{{search}}}
-        </div>
-        <button class='{{styles.more-icon}}'>
-          {{{moreIcon}}}
-        </button>
+      <div class='{{styles.search}}'>
+        {{{search}}}
       </div>
     </div>
-    <div class='{{styles.content-box}}'>
-      <div class='{{styles.message-box}} hide-scroll'>
-        <div class='{{styles.messages}}'>
-          {{#each messages}}
-            {{{this}}}
-          {{/each}}
+    <div class='{{styles.content-container}}'>
+      <div class='{{styles.content-box}}'>
+        <div class='{{styles.message-box}} hide-scroll'>
+          <div class='{{styles.messages}}'>
+            {{#each messageItems}}
+              {{{this}}}
+            {{/each}}
+          </div>
         </div>
-      </div>
-      <div class='{{styles.input}}'>
-        {{{chatInput}}}
+        <div class='{{styles.input}}'>
+          {{{chatInput}}}
+        </div>
       </div>
     </div>
   {{/if}}

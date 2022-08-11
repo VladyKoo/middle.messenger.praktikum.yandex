@@ -1,8 +1,7 @@
 import { Block } from '../../utils/Block';
 import styles from './search.module.scss';
-import tmpl from './search.hbs';
-
 import { Icon } from '../icon';
+import tmpl from './search.hbs';
 
 export type SearchProps = {
   styles?: Record<string, string>;

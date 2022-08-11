@@ -1,37 +1,77 @@
 import { Block } from '../../../../utils/Block';
+import { AboutChat } from './modules/about-chat/about-chat';
+import { AboutUser } from './modules/about-user/about-user';
+import { State, store } from '../../../../store';
+import { deepCompare } from '../../../../utils';
 import styles from './about-panel.module.scss';
 import tmpl from './about-panel.hbs';
 
-import { ProfileInfo } from '../../../../components/profile-info';
-import { Icon } from '../../../../components/icon';
+function getContent(panel) {
+  let content: Block | null = null;
+  switch (panel) {
+    case 'chat':
+      content = new AboutChat();
+      break;
+    case 'user':
+      content = new AboutUser();
+      break;
+    default:
+      break;
+  }
+  return content;
+}
+
+function mapStateToProps(state: State) {
+  let panel: string | null = null;
+
+  if (state.chats.aboutChat !== null) {
+    panel = 'chat';
+  } else if (state.users.aboutUser !== null) {
+    panel = 'user';
+  }
+
+  return {
+    show: state.chats.aboutChat !== null || state.users.aboutUser !== null,
+    panel,
+  };
+}
 
 export type AboutPanelProps = {
   styles?: Record<string, string>;
-  show: boolean;
-  closeIcon?: Icon;
-  profileInfo?: ProfileInfo;
+  show?: boolean;
+  panel?: string | null;
+  content?: Block | null;
 };
 
 export class AboutPanel extends Block<AboutPanelProps> {
-  constructor(props: AboutPanelProps) {
-    const avatarUrl = new URL('../../../../assets/images/avatar.png', import.meta.url);
+  constructor(props: AboutPanelProps = {}) {
+    let state = mapStateToProps(store.state);
+    const propsAndState = { ...props, ...state };
 
     super({
       styles,
-      closeIcon: new Icon({ icon: 'close' }),
-      profileInfo: new ProfileInfo({
-        avatarUrl,
-        fullname: 'Name Surname',
-        phone: '+7 900 000 00 00',
-        description: 'lorem ipsum',
-        email: 'user@google.com',
-        username: 'Username',
-      }),
-      ...props,
+      content: getContent(propsAndState.panel),
+      ...propsAndState,
+    });
+
+    store.subscribe(() => {
+      const newState = mapStateToProps(store.state);
+
+      if (!deepCompare(state, newState)) {
+        this.setProps({ ...newState });
+      }
+
+      state = newState;
     });
   }
 
   render(): DocumentFragment {
     return this.compile(tmpl, { ...this.props });
+  }
+
+  componentDidUpdate(oldProps, newProps) {
+    if (oldProps.panel !== newProps.panel) {
+      this.props.content = getContent(this.props.panel);
+    }
   }
 }
