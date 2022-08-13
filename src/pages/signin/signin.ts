@@ -7,6 +7,7 @@ import { Button } from '../../components/button';
 import { RouterLink } from '../../components/router-link';
 import styles from './signin.module.scss';
 import tmpl from './signin.hbs';
+import { SigninFormModel } from '../../api/auth-api';
 
 const authController = new AuthController();
 
@@ -72,7 +73,7 @@ export class Signin extends Block<SigninProps> {
 
     const data = Object.fromEntries(formData);
 
-    authController.signin(data);
+    authController.signin(data as SigninFormModel);
   }
 
   render(): DocumentFragment {

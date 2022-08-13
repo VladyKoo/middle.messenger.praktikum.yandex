@@ -5,7 +5,7 @@ import { v4 as makeUUID } from 'uuid';
 import { EventBus } from './EventBus';
 import { cloneDeep, debounce } from './index';
 
-export abstract class Block<Props = object> {
+export abstract class Block<Props extends object = object> {
   private _EVENTS = {
     INIT: '_init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -20,7 +20,7 @@ export abstract class Block<Props = object> {
 
   protected _element: HTMLElement | null = null;
 
-  private _removeEvents: void | (() => void);
+  private _removeEvents: void | (() => void) = undefined;
 
   private tagName: string;
 
@@ -30,7 +30,7 @@ export abstract class Block<Props = object> {
 
   private propsBeingUpdated: boolean = false;
 
-  private oldProps: Props;
+  private oldProps: Props = <Props>{};
 
   constructor(props: Props = <Props>{}, tagName = 'div') {
     this.tagName = tagName;
@@ -43,7 +43,7 @@ export abstract class Block<Props = object> {
   }
 
   private _makeProxy(props: Props): Props {
-    const debounceEmit = debounce((...args) => {
+    const debounceEmit = debounce((...args: any) => {
       this.propsBeingUpdated = false;
       this._eventBus.emit(this._EVENTS.FLOW_CDU, ...args);
     }, 150);
@@ -51,7 +51,7 @@ export abstract class Block<Props = object> {
     const proxyProps = new Proxy<Props>(props, {
       /* eslint no-param-reassign: ["error", { "props": false }] */
       set: (target, name: string, value) => {
-        const oldValue = target[name];
+        const oldValue = target[name as keyof Props];
 
         if (Array.isArray(oldValue)) {
           oldValue.forEach((oldValueItem) => {
@@ -69,7 +69,7 @@ export abstract class Block<Props = object> {
           this.oldProps = cloneDeep(this.props);
         }
 
-        target[name] = value;
+        target[name as keyof Props] = value;
 
         this.propsBeingUpdated = true;
 
@@ -136,7 +136,7 @@ export abstract class Block<Props = object> {
     }
   }
 
-  protected componentDidUpdate(oldProps?: Props, newProps?: Props): boolean | void {}
+  protected componentDidUpdate(_?: Props, __?: Props): boolean | void {}
 
   private _componentWillDestroy(): void {
     Object.values(this.children).forEach((child) => {

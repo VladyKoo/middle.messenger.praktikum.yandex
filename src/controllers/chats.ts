@@ -196,7 +196,7 @@ export class ChatsController {
 
       await webSocketApi.connect(userId, chatId, token);
 
-      webSocketApi.onMessage = (data) => this.onMessage(data, userId, chatId);
+      webSocketApi.onMessage = (data: Message) => this.onMessage(data, userId, chatId);
 
       this.getLiveMessages();
     } catch (error) {

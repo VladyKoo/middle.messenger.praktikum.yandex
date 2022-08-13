@@ -1,1 +1,2 @@
-export { Signup, SignupProps } from './signup';
+/* eslint no-restricted-exports: off */
+export { Signup as default, SignupProps } from './signup';

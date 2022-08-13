@@ -8,7 +8,7 @@ export class WebSocketApi {
 
   protected ws: WebSocket | null = null;
 
-  protected interval: number | null = null;
+  protected interval: NodeJS.Timer | null = null;
 
   constructor() {
     this.baseUrl = 'wss://ya-praktikum.tech/ws/chats';
@@ -82,5 +82,5 @@ export class WebSocketApi {
     );
   }
 
-  public onMessage(message: unknown[] | Record<string, unknown>) {}
+  public onMessage(_: any) {}
 }

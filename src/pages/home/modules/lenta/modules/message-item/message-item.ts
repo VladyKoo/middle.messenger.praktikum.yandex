@@ -5,7 +5,7 @@ import tmpl from './message-item.hbs';
 
 export type MessageItemProps = {
   styles?: Record<string, string>;
-  type?: string;
+  // type?: string;
   content?: string | URL;
   owner?: boolean;
   time?: string;
@@ -19,7 +19,7 @@ export class MessageItem extends Block<MessageItemProps> {
   constructor(props: MessageItemProps) {
     super({
       styles,
-      typeStyle: styles[props.type],
+      // typeStyle: styles[props.type],
       messageTime: getTime(props.time || ''),
       ...props,
     });

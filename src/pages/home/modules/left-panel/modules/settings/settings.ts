@@ -1,3 +1,4 @@
+import { PasswordFormModel } from './../../../../../../api/user-api';
 import { Block } from '../../../../../../utils/Block';
 import {
   emailValidator,
@@ -18,6 +19,7 @@ import { RouterLink } from '../../../../../../components/router-link';
 import { deepCompare } from '../../../../../../utils';
 import styles from './settings.module.scss';
 import tmpl from './settings.hbs';
+import { ProfileFormModel } from '../../../../../../api/user-api';
 
 const userController = new UserController();
 const authController = new AuthController();
@@ -180,9 +182,9 @@ export class Settings extends Block<SettingsProps> {
     const data = Object.fromEntries(formData);
 
     if (form === 'settingsForm') {
-      userController.changeProfile(data);
+      userController.changeProfile(data as ProfileFormModel);
     } else {
-      userController.changePassword(data);
+      userController.changePassword(data as PasswordFormModel);
     }
   }
 
@@ -205,9 +207,9 @@ export class Settings extends Block<SettingsProps> {
     this.children.changeAvatar?.setProps({ url: this.props.avatar });
 
     const fields = this.children.settingsForm?.props.fields as Input[];
-    fields.forEach((field) => {
+    fields.forEach((field: Input) => {
       if (field.props.name) {
-        field.setProps({ value: this.props[field.props.name] });
+        field.setProps({ value: this.props[field.props.name as keyof typeof mapStateToProps] });
       }
     });
   }

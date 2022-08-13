@@ -14,6 +14,7 @@ import { Button } from '../../components/button';
 import { RouterLink } from '../../components/router-link';
 import styles from './signup.module.scss';
 import tmpl from './signup.hbs';
+import { SignupFormModel } from '../../api/auth-api';
 
 const authController = new AuthController();
 
@@ -98,8 +99,8 @@ export class Signup extends Block<SignupProps> {
     });
   }
 
-  handleConfirmValidation(str) {
-    const fields = this.children.form.props.fields as Input[];
+  handleConfirmValidation(str: string) {
+    const fields = this.children.form?.props.fields as Input[];
 
     const password = fields.find((field) => field.props.name === 'password');
 
@@ -124,7 +125,7 @@ export class Signup extends Block<SignupProps> {
     const data = Object.fromEntries(formData);
     delete data.confirmPassword;
 
-    authController.signup(data);
+    authController.signup(data as SignupFormModel);
   }
 
   render(): DocumentFragment {

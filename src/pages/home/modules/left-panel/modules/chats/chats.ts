@@ -35,7 +35,7 @@ function getChats(chats: Chat[]): ChatItem[] {
 
           chatsController.getChatUsers(chat.id).then((data) => {
             const userId = store.state.auth.user.id;
-            if (data.length && userId) {
+            if (data?.length && userId) {
               chatsController.openLiveChat(userId, chat.id);
             } else {
               chatsController.closeLiveChat();

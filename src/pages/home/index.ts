@@ -1,1 +1,2 @@
-export { Home, HomeProps } from './home';
+/* eslint no-restricted-exports: off */
+export { Home as default, HomeProps } from './home';
