@@ -1,3 +1,4 @@
+/* eslint no-console: off */
 export type SendMessageModel = {
   content?: string;
   type?: string;
@@ -81,6 +82,8 @@ export class WebSocketApi {
       }),
     );
   }
+  /* eslint no-unused-vars: off */
+  /* eslint @typescript-eslint/no-unused-vars: off */
 
   public onMessage(_: any) {}
 }

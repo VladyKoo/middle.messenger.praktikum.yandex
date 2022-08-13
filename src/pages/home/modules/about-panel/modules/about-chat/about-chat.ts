@@ -15,6 +15,7 @@ const chatsController = new ChatsController();
 const userController = new UserController();
 
 function getChatUsers(chatUsers: ChatUser[]): ChatItem[] {
+  /* eslint implicit-arrow-linebreak: off */
   return chatUsers.map(
     (chatUser) =>
       new ChatItem({

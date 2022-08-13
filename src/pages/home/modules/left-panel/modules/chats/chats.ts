@@ -13,6 +13,7 @@ import tmpl from './chats.hbs';
 const chatsController = new ChatsController();
 
 function getChats(chats: Chat[]): ChatItem[] {
+  /* eslint implicit-arrow-linebreak: off */
   return chats.map(
     (chat) =>
       new ChatItem({

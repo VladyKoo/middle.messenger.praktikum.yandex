@@ -135,6 +135,8 @@ export abstract class Block<Props extends object = object> {
       this._eventBus.emit(this._EVENTS.FLOW_RENDER);
     }
   }
+  /* eslint no-unused-vars: off */
+  /* eslint @typescript-eslint/no-unused-vars: off */
 
   protected componentDidUpdate(_?: Props, __?: Props): boolean | void {}
 

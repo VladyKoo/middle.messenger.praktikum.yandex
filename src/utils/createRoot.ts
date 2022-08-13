@@ -4,7 +4,7 @@ export type Render = (component: Block) => void;
 
 export type Root = {
   render: Render;
-}
+};
 
 export function createRoot(container: HTMLElement | null): Root {
   if (!container) {
@@ -13,6 +13,7 @@ export function createRoot(container: HTMLElement | null): Root {
     const render = (component: Block) => {
       const child = component.getContent();
       if (child) {
+        /* eslint no-param-reassign: off */
         container.innerHTML = '';
         container.appendChild(child);
       }

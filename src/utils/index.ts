@@ -131,5 +131,6 @@ export function escape(string: string) {
     '/': '&#x2F;',
   };
 
+  /* eslint no-useless-escape: off */
   return string.replace(/[&<>"'\/]/g, (match: string) => htmlEscapes[match as keyof typeof htmlEscapes]);
 }

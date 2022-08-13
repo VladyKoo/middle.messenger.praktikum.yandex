@@ -1,4 +1,3 @@
-import { PasswordFormModel } from './../../../../../../api/user-api';
 import { Block } from '../../../../../../utils/Block';
 import {
   emailValidator,
@@ -19,7 +18,7 @@ import { RouterLink } from '../../../../../../components/router-link';
 import { deepCompare } from '../../../../../../utils';
 import styles from './settings.module.scss';
 import tmpl from './settings.hbs';
-import { ProfileFormModel } from '../../../../../../api/user-api';
+import { ProfileFormModel, PasswordFormModel } from '../../../../../../api/user-api';
 
 const userController = new UserController();
 const authController = new AuthController();
