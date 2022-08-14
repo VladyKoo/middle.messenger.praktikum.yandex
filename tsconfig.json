@@ -1,5 +1,5 @@
 {
-  "include": ["css-modules.d.ts", "./handlebars.d.ts"],
+  "include": ["index.d.ts", "src/**/*.ts"],
   "exclude": ["node_modules", "build"],
   "compilerOptions": {
     "target": "es5",

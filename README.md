@@ -5,21 +5,18 @@
 ![Heroku](https://heroku-badge.herokuapp.com/?app=radiant-hamlet-19909)
 ![GitHub repo size](https://img.shields.io/github/repo-size/VladyKoo/middle.messenger.praktikum.yandex)
 
-The Mesenger has been developed for **Yandex Praktikum** course. It is unpretentious mesenger with standard features:
+The Messanger has been developed for **Yandex Praktikum** course. It is unpretentious mesenger with standard features:
 
 - **Registration**
 - **Authorization**
 - **Chats**
 - **Messaging**
 
-Befor starting development, а UI disign was created on **Figma** https://www.figma.com/file/NO65Sa4RkMf1WoK7MZx6O4/yandex-messanger-public
+The project was written using **Typescript** on the basis of a [UI layout](https://www.figma.com/file/NO65Sa4RkMf1WoK7MZx6O4/yandex-messanger-public) designed on **Figma**. The building is made with **Webpack**. It may run inside a **Docker** container.
 
-Project was written using **Typescript**. **Mocha and Chai** were used for carrying out tests.
-Also the project includes linters, **Eslint** for javascript and typescript and **Stylelint** for scss.
+The **Mocha** was used for carrying out tests. Also, the project includes linters, **Eslint** for Typescript and **Stylelint** for SCSS. For greater reliability and convenience, the **pre-commit hook** was implemented, afterwards the hook was optimized with **lint-staged**
 
-The entire project was wraped with **Docker**.
-
-App was deployed on **<span style="color:#7B57A4">Heroku</span>** https://radiant-hamlet-19909.herokuapp.com and **<span style="color:#41A5BD">Netlify</span>** https://vladykoo-chat.netlify.app
+Finally, the App was deployed on [**<span style="color:#7B57A4">Heroku</span>**](https://radiant-hamlet-19909.herokuapp.com) and [**<span style="color:#41A5BD">Netlify</span>**](https://vladykoo-chat.netlify.app)
 
 # Settings
 
