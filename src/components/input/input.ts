@@ -1,6 +1,6 @@
-import { Block } from '../../utils/Block';
-import type { Validator } from '../../utils/fieldValidators';
-import { KeyboardKey } from '../../utils/enums/keyboardKeyEnum';
+import { Block } from '@/utils/Block';
+import type { Validator } from '@/utils/fieldValidators';
+import { KeyboardKey } from '@/utils/enums/keyboardKeyEnum';
 import styles from './input.module.scss';
 import tmpl from './input.hbs';
 

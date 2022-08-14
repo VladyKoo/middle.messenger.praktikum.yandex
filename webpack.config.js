@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -82,5 +83,6 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.js'],
+    plugins: [new TsconfigPathsPlugin()],
   },
 };

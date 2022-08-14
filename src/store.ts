@@ -1,6 +1,6 @@
-import { Store } from './utils/Store';
+import { Store } from '@/utils/Store';
 
-const defaultAvatar = new URL('./assets/images/avatar.png', import.meta.url);
+const defaultAvatar = new URL('@/assets/images/avatar.png', import.meta.url);
 
 export type User = {
   id?: number;

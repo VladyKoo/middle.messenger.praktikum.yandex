@@ -1,8 +1,8 @@
-import { Block } from '../../../../utils/Block';
+import { Block } from '@./utils/Block';
+import { State, store } from '@/store';
+import { deepCompare } from '@/utils';
 import { AboutChat } from './modules/about-chat/about-chat';
 import { AboutUser } from './modules/about-user/about-user';
-import { State, store } from '../../../../store';
-import { deepCompare } from '../../../../utils';
 import styles from './about-panel.module.scss';
 import tmpl from './about-panel.hbs';
 

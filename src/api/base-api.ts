@@ -1,7 +1,7 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
-import { store } from '../store';
-import { queryStringify } from '../utils';
-import { Fetch, FetchResponse, FetchOptions } from '../utils/Fetch';
+import { store } from '@/store';
+import { queryStringify } from '@/utils';
+import { Fetch, FetchResponse, FetchOptions } from '@/utils/Fetch';
 
 export type BaseApiOptions = FetchOptions & {
   basePath?: string;

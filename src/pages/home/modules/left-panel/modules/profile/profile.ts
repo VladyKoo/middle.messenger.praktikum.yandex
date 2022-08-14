@@ -1,9 +1,9 @@
-import { Block } from '../../../../../../utils/Block';
-import { store, State } from '../../../../../../store';
-import { deepCompare } from '../../../../../../utils';
-import { ProfileInfo } from '../../../../../../components/profile-info';
-import { Icon } from '../../../../../../components/icon';
-import { RouterLink } from '../../../../../../components/router-link';
+import { Block } from '@/utils/Block';
+import { store, State } from '@/store';
+import { deepCompare } from '@/utils';
+import { ProfileInfo } from '@/components/profile-info';
+import { Icon } from '@/components/icon';
+import { RouterLink } from '@/components/router-link';
 import styles from './profile.module.scss';
 import tmpl from './profile.hbs';
 

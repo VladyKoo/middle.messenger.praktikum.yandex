@@ -1,24 +1,24 @@
-import { Block } from '../../../../../../utils/Block';
+import { Block } from '@/utils/Block';
 import {
   emailValidator,
   nameValidator,
   passwordValidator,
   phoneValidator,
   loginValidator,
-} from '../../../../../../utils/fieldValidators';
-import { UserController } from '../../../../../../controllers/user';
-import { AuthController } from '../../../../../../controllers/auth';
-import { store, State } from '../../../../../../store';
-import { ChangeAvatar } from '../../../../../../components/change-avatar';
-import { Form } from '../../../../../../components/form';
-import { Input } from '../../../../../../components/input';
-import { Button } from '../../../../../../components/button';
-import { Icon } from '../../../../../../components/icon';
-import { RouterLink } from '../../../../../../components/router-link';
-import { deepCompare } from '../../../../../../utils';
+} from '@/utils/fieldValidators';
+import { UserController } from '@/controllers/user';
+import { AuthController } from '@/controllers/auth';
+import { ProfileFormModel, PasswordFormModel } from '@/api/user-api';
+import { deepCompare } from '@/utils';
+import { store, State } from '@/store';
+import { ChangeAvatar } from '@/components/change-avatar';
+import { Form } from '@/components/form';
+import { Input } from '@/components/input';
+import { Button } from '@/components/button';
+import { Icon } from '@/components/icon';
+import { RouterLink } from '@/components/router-link';
 import styles from './settings.module.scss';
 import tmpl from './settings.hbs';
-import { ProfileFormModel, PasswordFormModel } from '../../../../../../api/user-api';
 
 const userController = new UserController();
 const authController = new AuthController();

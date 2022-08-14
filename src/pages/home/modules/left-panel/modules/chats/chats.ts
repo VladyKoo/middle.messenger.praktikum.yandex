@@ -1,12 +1,12 @@
-import { Block } from '../../../../../../utils/Block';
-import { Avatar } from '../../../../../../components/avatar';
-import { Search } from '../../../../../../components/search';
-import { ChatItem } from '../../../../../../components/chat-item';
-import { RouterLink } from '../../../../../../components/router-link';
+import { Block } from '@/utils/Block';
+import { store, State, Chat } from '@/store';
+import { deepCompare } from '@/utils';
+import { ChatsController } from '@/controllers/chats';
+import { Avatar } from '@/components/avatar';
+import { Search } from '@/components/search';
+import { ChatItem } from '@/components/chat-item';
+import { RouterLink } from '@/components/router-link';
 import { CreateChat } from './modules/create-chat';
-import { store, State, Chat } from '../../../../../../store';
-import { deepCompare } from '../../../../../../utils';
-import { ChatsController } from '../../../../../../controllers/chats';
 import styles from './chats.module.scss';
 import tmpl from './chats.hbs';
 

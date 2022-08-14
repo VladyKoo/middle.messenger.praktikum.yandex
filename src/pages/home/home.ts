@@ -1,4 +1,4 @@
-import { Block } from '../../utils/Block';
+import { Block } from '@/utils/Block';
 import { LeftPanel } from './modules/left-panel';
 import { Lenta } from './modules/lenta';
 import { AboutPanel } from './modules/about-panel';

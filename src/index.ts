@@ -1,10 +1,10 @@
-import { ChatsController } from './controllers/chats';
-import { router } from './router';
-import { store } from './store';
-import { AuthController } from './controllers/auth';
+import { ChatsController } from '@/controllers/chats';
+import { router } from '@/router';
+import { store } from '@/store';
+import { AuthController } from '@/controllers/auth';
 
-import './assets/styles/normalize.css';
-import './assets/styles/style.scss';
+import '@/assets/styles/normalize.css';
+import '@/assets/styles/style.scss';
 
 const authController = new AuthController();
 const chatsController = new ChatsController();

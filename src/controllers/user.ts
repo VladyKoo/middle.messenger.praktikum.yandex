@@ -1,7 +1,7 @@
-import { store, User, addNotify } from '../store';
-import { ResourcesController } from './resources';
-import { UserApi, ProfileFormModel, PasswordFormModel } from '../api/user-api';
-import { StatusCode } from '../utils/enums/statusCodeEnum';
+import { store, User, addNotify } from '@/store';
+import { ResourcesController } from '@/controllers/resources';
+import { UserApi, ProfileFormModel, PasswordFormModel } from '@/api/user-api';
+import { StatusCode } from '@/utils/enums/statusCodeEnum';
 
 const userApi = new UserApi();
 

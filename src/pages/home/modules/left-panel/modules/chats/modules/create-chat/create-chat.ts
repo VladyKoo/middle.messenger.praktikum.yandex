@@ -1,7 +1,7 @@
-import { ChatsController } from '../../../../../../../../controllers/chats';
-import { Block } from '../../../../../../../../utils/Block';
-import { Icon } from '../../../../../../../../components/icon';
-import { KeyboardKey } from '../../../../../../../../utils/enums/keyboardKeyEnum';
+import { Block } from '@/utils/Block';
+import { KeyboardKey } from '@/utils/enums/keyboardKeyEnum';
+import { ChatsController } from '@/controllers/chats';
+import { Icon } from '@/components/icon';
 import styles from './create-chat.module.scss';
 import tmpl from './create-chat.hbs';
 

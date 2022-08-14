@@ -1,4 +1,4 @@
-import { Block } from '../../utils/Block';
+import { Block } from '@/utils/Block';
 import {
   confirmPasswordValidator,
   emailValidator,
@@ -6,15 +6,15 @@ import {
   nameValidator,
   passwordValidator,
   phoneValidator,
-} from '../../utils/fieldValidators';
-import { AuthController } from '../../controllers/auth';
-import { Form } from '../../components/form';
-import { Input } from '../../components/input';
-import { Button } from '../../components/button';
-import { RouterLink } from '../../components/router-link';
+} from '@/utils/fieldValidators';
+import { AuthController } from '@/controllers/auth';
+import { SignupFormModel } from '@/api/auth-api';
+import { Form } from '@/components/form';
+import { Input } from '@/components/input';
+import { Button } from '@/components/button';
+import { RouterLink } from '@/components/router-link';
 import styles from './signup.module.scss';
 import tmpl from './signup.hbs';
-import { SignupFormModel } from '../../api/auth-api';
 
 const authController = new AuthController();
 

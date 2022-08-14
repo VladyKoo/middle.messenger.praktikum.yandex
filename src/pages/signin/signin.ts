@@ -1,13 +1,13 @@
-import { Block } from '../../utils/Block';
-import { loginValidator, passwordValidator } from '../../utils/fieldValidators';
-import { AuthController } from '../../controllers/auth';
-import { Form } from '../../components/form';
-import { Input } from '../../components/input';
-import { Button } from '../../components/button';
-import { RouterLink } from '../../components/router-link';
+import { Block } from '@/utils/Block';
+import { loginValidator, passwordValidator } from '@/utils/fieldValidators';
+import { AuthController } from '@/controllers/auth';
+import { SigninFormModel } from '@/api/auth-api';
+import { Form } from '@/components/form';
+import { Input } from '@/components/input';
+import { Button } from '@/components/button';
+import { RouterLink } from '@/components/router-link';
 import styles from './signin.module.scss';
 import tmpl from './signin.hbs';
-import { SigninFormModel } from '../../api/auth-api';
 
 const authController = new AuthController();
 

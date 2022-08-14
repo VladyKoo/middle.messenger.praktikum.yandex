@@ -1,13 +1,13 @@
-import { UserController } from '../../../../../../controllers/user';
-import { Block } from '../../../../../../utils/Block';
-import { Input } from '../../../../../../components/input';
-import { ChatsController } from '../../../../../../controllers/chats';
-import { ChangeAvatar } from '../../../../../../components/change-avatar';
-import { ChatItem } from '../../../../../../components/chat-item';
-import { Icon } from '../../../../../../components/icon';
-import { Button } from '../../../../../../components/button';
-import { State, store, ChatUser } from '../../../../../../store';
-import { deepCompare } from '../../../../../../utils';
+import { UserController } from '@/controllers/user';
+import { Block } from '@/utils/Block';
+import { Input } from '@/components/input';
+import { ChatsController } from '@/controllers/chats';
+import { ChangeAvatar } from '@/components/change-avatar';
+import { ChatItem } from '@/components/chat-item';
+import { Icon } from '@/components/icon';
+import { Button } from '@/components/button';
+import { State, store, ChatUser } from '@/store';
+import { deepCompare } from '@/utils';
 import styles from './about-chat.module.scss';
 import tmpl from './about-chat.hbs';
 

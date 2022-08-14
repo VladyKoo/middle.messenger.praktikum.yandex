@@ -1,5 +1,6 @@
 {
   "include": ["css-modules.d.ts", "./handlebars.d.ts"],
+  "exclude": ["node_modules", "build"],
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -17,7 +18,7 @@
     "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
-      "~*": ["./src/*"]
+      "@*": ["./src/*"]
     }
   }
 }

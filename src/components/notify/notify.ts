@@ -1,6 +1,6 @@
-import { Block } from '../../utils/Block';
-import { store, NotifyItem } from '../../store';
-import { cloneDeep, deepCompare } from '../../utils';
+import { Block } from '@/utils/Block';
+import { store, NotifyItem } from '@/store';
+import { cloneDeep, deepCompare } from '@/utils';
 import styles from './notify.module.scss';
 import tmpl from './notify.hbs';
 

@@ -1,5 +1,5 @@
-import { Block } from '../../utils/Block';
-import { Notify } from '../../components/notify';
+import { Block } from '@/utils/Block';
+import { Notify } from '@/components/notify';
 import styles from './default.module.scss';
 import tmpl from './default.hbs';
 

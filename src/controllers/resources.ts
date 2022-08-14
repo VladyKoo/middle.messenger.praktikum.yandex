@@ -1,6 +1,6 @@
-import { store, addNotify } from '../store';
-import { ResourcesApi } from '../api/resources-api';
-import { StatusCode } from '../utils/enums/statusCodeEnum';
+import { store, addNotify } from '@/store';
+import { ResourcesApi } from '@/api/resources-api';
+import { StatusCode } from '@/utils/enums/statusCodeEnum';
 
 const resourcesApi = new ResourcesApi();
 

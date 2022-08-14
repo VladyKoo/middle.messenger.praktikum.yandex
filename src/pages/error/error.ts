@@ -1,5 +1,5 @@
-import { Block } from '../../utils/Block';
-import { RouterLink } from '../../components/router-link';
+import { Block } from '@/utils/Block';
+import { RouterLink } from '@/components/router-link';
 import styles from './error.module.scss';
 import tmpl from './error.hbs';
 

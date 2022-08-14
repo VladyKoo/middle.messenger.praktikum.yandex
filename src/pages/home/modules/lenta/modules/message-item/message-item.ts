@@ -1,5 +1,5 @@
-import { Block } from '../../../../../../utils/Block';
-import { getTime } from '../../../../../../utils';
+import { Block } from '@/utils/Block';
+import { getTime } from '@/utils';
 import styles from './message-item.module.scss';
 import tmpl from './message-item.hbs';
 
