@@ -6,8 +6,8 @@
   "license": "MIT",
   "author": "Kurochkin Vladislav",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack serve",
-    "build": "cross-env NODE_ENV=production webpack",
+    "dev": "cross-env NODE_ENV=development webpack serve --config webpack.dev.js",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
     "start": "npm run build && node src/app.js",
     "lint": "eslint --ext .js,.ts --ignore-path .gitignore .",
     "test": "mocha",
@@ -59,6 +59,7 @@
     "webpack": "5.74.0",
     "webpack-cli": "4.10.0",
     "webpack-dev-server": "4.10.0",
+    "webpack-merge": "5.8.0",
     "xmlhttprequest": "1.8.0"
   }
 }
