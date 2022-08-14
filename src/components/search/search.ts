@@ -1,6 +1,6 @@
-import { Block } from '../../utils/Block';
+import { Block } from '@/utils/Block';
+import { Icon } from '@/components/icon';
 import styles from './search.module.scss';
-import { Icon } from '../icon';
 import tmpl from './search.hbs';
 
 export type SearchProps = {

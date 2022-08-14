@@ -1,8 +1,8 @@
-import { router } from '../router';
-import { store, User, addNotify } from '../store';
-import { ResourcesController } from './resources';
-import { AuthApi, SigninFormModel, SignupFormModel } from '../api/auth-api';
-import { StatusCode } from '../utils/enums/statusCodeEnum';
+import { router } from '@/router';
+import { store, User, addNotify } from '@/store';
+import { ResourcesController } from '@/controllers/resources';
+import { AuthApi, SigninFormModel, SignupFormModel } from '@/api/auth-api';
+import { StatusCode } from '@/utils/enums/statusCodeEnum';
 
 const authApi = new AuthApi();
 

@@ -1,4 +1,4 @@
-@import '../../../static/styles/var';
+@import '../../assets/styles/var';
 
 .box {
   width: 100%;
@@ -13,7 +13,7 @@
   border-radius: 8px;
   padding: 5px 10px;
   margin-bottom: 10px;
-  background-color: rgba(255, 255, 255, 0.437);
+  background-color: rgba(255 255 255 / 0.437);
   font-weight: 600;
 
   &:last-child {
@@ -29,7 +29,7 @@
   }
 
   &.success {
-    color: #00ff00;
+    color: #0f0;
   }
 }
 
@@ -38,7 +38,7 @@
   border-radius: 2px;
   color: #fff;
   margin-left: 20px;
-  
+
   &:hover {
     transform: scale(1.2);
   }

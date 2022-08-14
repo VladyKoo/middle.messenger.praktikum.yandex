@@ -1,5 +1,5 @@
-import { FetchResponse } from '../utils/Fetch';
-import { BaseAPI } from './base-api';
+import { FetchResponse } from '@./utils/Fetch';
+import { BaseAPI } from '@/api/base-api';
 
 export type GetChatQueriesModel = {
   offset: number;

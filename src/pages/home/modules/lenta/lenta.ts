@@ -1,10 +1,10 @@
-import { Block } from '../../../../utils/Block';
-import { deepCompare, escape } from '../../../../utils';
-import { Avatar } from '../../../../components/avatar';
-import { Search } from '../../../../components/search';
+import { Block } from '@/utils/Block';
+import { deepCompare, escape } from '@/utils';
+import { store, State, Message } from '@/store';
+import { Avatar } from '@/components/avatar';
+import { Search } from '@/components/search';
 import { MessageItem } from './modules/message-item';
 import { ChatInput } from './modules/chat-input/chat-input';
-import { store, State, Message } from '../../../../store';
 import styles from './lenta.module.scss';
 import tmpl from './lenta.hbs';
 

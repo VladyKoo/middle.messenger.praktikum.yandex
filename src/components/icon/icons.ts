@@ -1,3 +1,7 @@
+export type Icon = {
+  pathData: string
+}
+
 const icons = {
   'add-photo': {
     pathData:
@@ -65,5 +69,6 @@ const icons = {
 };
 
 export function getPathData(icon: string): string {
-  return icons[icon]?.pathData;
+  const path = icons[icon as keyof typeof icons] as Icon;
+  return path?.pathData || '';
 }

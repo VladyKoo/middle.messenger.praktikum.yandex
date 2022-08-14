@@ -1,4 +1,4 @@
-import { Block } from '../../utils/Block';
+import { Block } from '@/utils/Block';
 import { getPathData } from './icons';
 import tmpl from './icon.hbs';
 

@@ -1,15 +1,15 @@
-import { store, Chat, ChatUser, Message, addNotify } from '../store';
-import { ResourcesController } from './resources';
+import { store, Chat, ChatUser, Message, addNotify } from '@/store';
+import { ResourcesController } from '@/controllers/resources';
 import {
   ChatsApi,
   GetChatQueriesModel,
   ChangeUsersInChatModel,
   GetChatUsersQueriesModel,
-} from '../api/chats-api';
-import { WebSocketApi } from '../api/websocket-api';
-import { StatusCode } from '../utils/enums/statusCodeEnum';
+} from '@/api/chats-api';
+import { WebSocketApi } from '@/api/websocket-api';
+import { StatusCode } from '@/utils/enums/statusCodeEnum';
 
-const defaultAvatar = new URL('../assets/images/avatar.png', import.meta.url);
+const defaultAvatar = new URL('@/assets/images/avatar.png', import.meta.url);
 
 const chatsApi = new ChatsApi();
 const webSocketApi = new WebSocketApi();
@@ -196,7 +196,7 @@ export class ChatsController {
 
       await webSocketApi.connect(userId, chatId, token);
 
-      webSocketApi.onMessage = (data) => this.onMessage(data, userId, chatId);
+      webSocketApi.onMessage = (data: Message) => this.onMessage(data, userId, chatId);
 
       this.getLiveMessages();
     } catch (error) {

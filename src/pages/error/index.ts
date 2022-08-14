@@ -1,1 +1,2 @@
-export { Error, ErrorProps } from './error';
+/* eslint no-restricted-exports: off */
+export { Error as default, ErrorProps } from './error';

@@ -1,4 +1,4 @@
-import { Block } from '../../utils/Block';
+import { Block } from '@/utils/Block';
 import {
   confirmPasswordValidator,
   emailValidator,
@@ -6,12 +6,13 @@ import {
   nameValidator,
   passwordValidator,
   phoneValidator,
-} from '../../utils/fieldValidators';
-import { AuthController } from '../../controllers/auth';
-import { Form } from '../../components/form';
-import { Input } from '../../components/input';
-import { Button } from '../../components/button';
-import { RouterLink } from '../../components/router-link';
+} from '@/utils/fieldValidators';
+import { AuthController } from '@/controllers/auth';
+import { SignupFormModel } from '@/api/auth-api';
+import { Form } from '@/components/form';
+import { Input } from '@/components/input';
+import { Button } from '@/components/button';
+import { RouterLink } from '@/components/router-link';
 import styles from './signup.module.scss';
 import tmpl from './signup.hbs';
 
@@ -98,8 +99,8 @@ export class Signup extends Block<SignupProps> {
     });
   }
 
-  handleConfirmValidation(str) {
-    const fields = this.children.form.props.fields as Input[];
+  handleConfirmValidation(str: string) {
+    const fields = this.children.form?.props.fields as Input[];
 
     const password = fields.find((field) => field.props.name === 'password');
 
@@ -124,7 +125,7 @@ export class Signup extends Block<SignupProps> {
     const data = Object.fromEntries(formData);
     delete data.confirmPassword;
 
-    authController.signup(data);
+    authController.signup(data as SignupFormModel);
   }
 
   render(): DocumentFragment {

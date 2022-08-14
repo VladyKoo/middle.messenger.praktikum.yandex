@@ -1,4 +1,4 @@
-import { Block } from '../../../../utils/Block';
+import { Block } from '@/utils/Block';
 import { Chats } from './modules/chats';
 import { Profile } from './modules/profile';
 import { Settings } from './modules/settings';

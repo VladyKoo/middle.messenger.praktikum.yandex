@@ -1,5 +1,6 @@
 {
-  "include": ["css-modules.d.ts", "./handlebars.d.ts"],
+  "include": ["index.d.ts", "src/**/*.ts"],
+  "exclude": ["node_modules", "build"],
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -10,14 +11,14 @@
     "strict": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "sourceMap": true,
     "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
-      "~*": ["./src/*"]
+      "@*": ["./src/*"]
     }
   }
 }

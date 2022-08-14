@@ -1,24 +1,20 @@
-import { Router } from './utils/Router';
+import { Route, Router } from '@/utils/Router';
 
-import { Home } from './pages/home';
-import { Error } from './pages/error';
-import { Signin } from './pages/signin';
-import { Signup } from './pages/signup';
-import { Default } from './layout/default';
+import { Default } from '@/layout/default';
 
-const routes = [
+const routes: Route[] = [
   {
     path: '/',
     component: Default,
     props: {
-      outlet: Signin,
+      outlet: () => import('@/pages/signin'),
     },
   },
   {
     path: '/messenger',
     component: Default,
     props: {
-      outlet: Home,
+      outlet: () => import('@/pages/home'),
       outletProp: { route: '/messenger' },
     },
   },
@@ -26,7 +22,7 @@ const routes = [
     path: '/settings',
     component: Default,
     props: {
-      outlet: Home,
+      outlet: () => import('@/pages/home'),
       outletProp: { route: '/settings' },
     },
   },
@@ -34,7 +30,7 @@ const routes = [
     path: '/profile',
     component: Default,
     props: {
-      outlet: Home,
+      outlet: () => import('@/pages/home'),
       outletProp: { route: '/profile' },
     },
   },
@@ -42,14 +38,14 @@ const routes = [
     path: '/sign-up',
     component: Default,
     props: {
-      outlet: Signup,
+      outlet: () => import('@/pages/signup'),
     },
   },
   {
     path: '*',
     component: Default,
     props: {
-      outlet: Error,
+      outlet: () => import('@/pages/error'),
       outletProp: { title: '404 Page Not Found' },
     },
   },

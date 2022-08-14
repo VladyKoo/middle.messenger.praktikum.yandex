@@ -1,21 +1,22 @@
-import { Block } from '../../../../../../utils/Block';
+import { Block } from '@/utils/Block';
 import {
   emailValidator,
   nameValidator,
   passwordValidator,
   phoneValidator,
   loginValidator,
-} from '../../../../../../utils/fieldValidators';
-import { UserController } from '../../../../../../controllers/user';
-import { AuthController } from '../../../../../../controllers/auth';
-import { store, State } from '../../../../../../store';
-import { ChangeAvatar } from '../../../../../../components/change-avatar';
-import { Form } from '../../../../../../components/form';
-import { Input } from '../../../../../../components/input';
-import { Button } from '../../../../../../components/button';
-import { Icon } from '../../../../../../components/icon';
-import { RouterLink } from '../../../../../../components/router-link';
-import { deepCompare } from '../../../../../../utils';
+} from '@/utils/fieldValidators';
+import { UserController } from '@/controllers/user';
+import { AuthController } from '@/controllers/auth';
+import { ProfileFormModel, PasswordFormModel } from '@/api/user-api';
+import { deepCompare } from '@/utils';
+import { store, State } from '@/store';
+import { ChangeAvatar } from '@/components/change-avatar';
+import { Form } from '@/components/form';
+import { Input } from '@/components/input';
+import { Button } from '@/components/button';
+import { Icon } from '@/components/icon';
+import { RouterLink } from '@/components/router-link';
 import styles from './settings.module.scss';
 import tmpl from './settings.hbs';
 
@@ -180,9 +181,9 @@ export class Settings extends Block<SettingsProps> {
     const data = Object.fromEntries(formData);
 
     if (form === 'settingsForm') {
-      userController.changeProfile(data);
+      userController.changeProfile(data as ProfileFormModel);
     } else {
-      userController.changePassword(data);
+      userController.changePassword(data as PasswordFormModel);
     }
   }
 
@@ -205,9 +206,9 @@ export class Settings extends Block<SettingsProps> {
     this.children.changeAvatar?.setProps({ url: this.props.avatar });
 
     const fields = this.children.settingsForm?.props.fields as Input[];
-    fields.forEach((field) => {
+    fields.forEach((field: Input) => {
       if (field.props.name) {
-        field.setProps({ value: this.props[field.props.name] });
+        field.setProps({ value: this.props[field.props.name as keyof typeof mapStateToProps] });
       }
     });
   }

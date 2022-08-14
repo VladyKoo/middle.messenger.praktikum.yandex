@@ -1,6 +1,6 @@
-import { Block } from '../../utils/Block';
-import { getTime } from '../../utils';
-import { Avatar } from '../avatar';
+import { Block } from '@/utils/Block';
+import { getTime } from '@/utils';
+import { Avatar } from '@/components/avatar';
 import styles from './chat-item.module.scss';
 import tmpl from './chat-item.hbs';
 

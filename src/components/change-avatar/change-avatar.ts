@@ -1,6 +1,6 @@
-import { Icon } from '../icon';
-import { Avatar } from '../avatar';
-import { Block } from '../../utils/Block';
+import { Icon } from '@/components/icon';
+import { Avatar } from '@/components/avatar';
+import { Block } from '@/utils/Block';
 import styles from './change-avatar.module.scss';
 import tmpl from './change-avatar.hbs';
 

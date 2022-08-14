@@ -1,3 +1,4 @@
+/* eslint no-console: off */
 export type SendMessageModel = {
   content?: string;
   type?: string;
@@ -8,7 +9,7 @@ export class WebSocketApi {
 
   protected ws: WebSocket | null = null;
 
-  protected interval: number | null = null;
+  protected interval: NodeJS.Timer | null = null;
 
   constructor() {
     this.baseUrl = 'wss://ya-praktikum.tech/ws/chats';
@@ -81,6 +82,8 @@ export class WebSocketApi {
       }),
     );
   }
+  /* eslint no-unused-vars: off */
+  /* eslint @typescript-eslint/no-unused-vars: off */
 
-  public onMessage(message: unknown[] | Record<string, unknown>) {}
+  public onMessage(_: any) {}
 }

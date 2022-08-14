@@ -1,12 +1,19 @@
-import { Block } from '../../../../utils/Block';
+import { Block } from '@./utils/Block';
+import { State, store } from '@/store';
+import { deepCompare } from '@/utils';
 import { AboutChat } from './modules/about-chat/about-chat';
 import { AboutUser } from './modules/about-user/about-user';
-import { State, store } from '../../../../store';
-import { deepCompare } from '../../../../utils';
 import styles from './about-panel.module.scss';
 import tmpl from './about-panel.hbs';
 
-function getContent(panel) {
+export type AboutPanelProps = {
+  styles?: Record<string, string>;
+  show?: boolean;
+  panel?: string | null;
+  content?: Block | null;
+};
+
+function getContent(panel: AboutPanelProps['panel']) {
   let content: Block | null = null;
   switch (panel) {
     case 'chat':
@@ -36,13 +43,6 @@ function mapStateToProps(state: State) {
   };
 }
 
-export type AboutPanelProps = {
-  styles?: Record<string, string>;
-  show?: boolean;
-  panel?: string | null;
-  content?: Block | null;
-};
-
 export class AboutPanel extends Block<AboutPanelProps> {
   constructor(props: AboutPanelProps = {}) {
     let state = mapStateToProps(store.state);
@@ -69,7 +69,7 @@ export class AboutPanel extends Block<AboutPanelProps> {
     return this.compile(tmpl, { ...this.props });
   }
 
-  componentDidUpdate(oldProps, newProps) {
+  componentDidUpdate(oldProps: AboutPanelProps, newProps: AboutPanelProps) {
     if (oldProps.panel !== newProps.panel) {
       this.props.content = getContent(this.props.panel);
     }

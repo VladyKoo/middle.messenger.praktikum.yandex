@@ -19,7 +19,7 @@ export function debounce(callback: Function, time: number) {
     if (timeout) {
       clearTimeout(timeout);
     }
-    timeout = setTimeout(() => callback.call(this, ...args), time);
+    timeout = setTimeout(() => callback.call(null, ...args), time);
   };
 }
 
@@ -61,7 +61,7 @@ export function queryStringify(data: Record<string, any>): string | never {
       return;
     }
     if (isArray(value)) {
-      value.forEach((item, i) => {
+      value.forEach((item: unknown, i: number) => {
         result.push(`${key}[${i}]=${item}`);
       });
     } else if (isPlainObject(value)) {
@@ -121,7 +121,7 @@ export function cloneDeep(target: unknown, map = new WeakMap()) {
   return target;
 }
 
-export function escape(string) {
+export function escape(string: string) {
   const htmlEscapes = {
     '&': '&amp;',
     '<': '&lt;',
@@ -131,5 +131,6 @@ export function escape(string) {
     '/': '&#x2F;',
   };
 
-  return string.replace(/[&<>"'\/]/g, (match) => htmlEscapes[match]);
+  /* eslint no-useless-escape: off */
+  return string.replace(/[&<>"'\/]/g, (match: string) => htmlEscapes[match as keyof typeof htmlEscapes]);
 }

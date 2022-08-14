@@ -1,10 +1,10 @@
-import { ChatsController } from '../../../../../../controllers/chats';
-import { Block } from '../../../../../../utils/Block';
-import { ProfileInfo } from '../../../../../../components/profile-info';
-import { Icon } from '../../../../../../components/icon';
-import { Button } from '../../../../../../components/button';
-import { State, store } from '../../../../../../store';
-import { deepCompare } from '../../../../../../utils';
+import { ChatsController } from '@/controllers/chats';
+import { Block } from '@/utils/Block';
+import { ProfileInfo } from '@/components/profile-info';
+import { Icon } from '@/components/icon';
+import { Button } from '@/components/button';
+import { State, store } from '@/store';
+import { deepCompare } from '@/utils';
 import styles from './about-user.module.scss';
 import tmpl from './about-user.hbs';
 

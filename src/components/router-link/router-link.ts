@@ -1,5 +1,5 @@
-import { Block } from '../../utils/Block';
-import { router } from '../../router';
+import { Block } from '@/utils/Block';
+import { router } from '@/router';
 import tmpl from './router-link.hbs';
 
 export type RouterLinkProps = {

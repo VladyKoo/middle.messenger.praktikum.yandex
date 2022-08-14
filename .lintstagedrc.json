@@ -1,0 +1,5 @@
+{
+  "*.{ts,js}": "eslint",
+  "*.{scss,css}": "stylelint",
+  "*.spec.{ts,js}": "mocha"
+}

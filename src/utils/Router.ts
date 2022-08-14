@@ -3,7 +3,7 @@ import { createRoot, Root } from './createRoot';
 
 export type Route = {
   path: string;
-  component: new (props: Record<string, unknown>) => Block;
+  component: new (props: any) => Block;
   props?: Record<string, unknown>;
   name?: string;
   children?: Route[];

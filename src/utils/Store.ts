@@ -1,7 +1,7 @@
 import { cloneDeep, deepCompare, debounce } from '.';
 import { EventBus } from './EventBus';
 
-export class Store<State = {}> extends EventBus {
+export class Store<State extends object = object> extends EventBus {
   private _EVENTS = {
     FLOW_SDU: 'flow:state-did-update',
   };
@@ -18,12 +18,12 @@ export class Store<State = {}> extends EventBus {
   }
 
   private _makeProxy(obj: State): State {
-    const proxyState = {};
+    const proxyState = {} as any;
 
     const keys = Object.getOwnPropertyNames(obj);
 
-    keys.forEach((key) => {
-      const value = obj[key];
+    keys.forEach((key: string) => {
+      const value: any = obj[key as keyof State];
 
       if (value && value.constructor === Object) {
         proxyState[key] = this._makeProxy(value);
@@ -37,7 +37,7 @@ export class Store<State = {}> extends EventBus {
     return this._createProxy(proxyState);
   }
 
-  private _createProxy(obj: State): State {
+  private _createProxy(obj: State | State[]): State {
     const debouncedEmit = debounce(() => {
       this.emit(this._EVENTS.FLOW_SDU);
     }, 150);

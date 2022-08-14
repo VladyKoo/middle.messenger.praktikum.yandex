@@ -1,11 +1,11 @@
-import { Block } from '../../utils/Block';
-import { Notify } from '../../components/notify';
+import { Block } from '@/utils/Block';
+import { Notify } from '@/components/notify';
 import styles from './default.module.scss';
 import tmpl from './default.hbs';
 
 export type DefaultProps = {
   styles?: Record<string, string>;
-  outlet: new (props?: Record<string, unknown>) => any;
+  outlet: () => Promise<any>;
   content?: Block;
   outletProp?: Record<string, unknown>;
   notify?: Notify;
@@ -13,7 +13,16 @@ export type DefaultProps = {
 
 export class Default extends Block<DefaultProps> {
   constructor(props: DefaultProps) {
-    super({ styles, content: new props.outlet(props.outletProp), notify: new Notify(), ...props });
+    super({ styles, notify: new Notify(), ...props });
+  }
+
+  componentDidMount() {
+    this.props.outlet().then((module) => {
+      if (module.default) {
+        const content = new module.default(this.props.outletProp);
+        this.setProps({ content });
+      }
+    });
   }
 
   render(): DocumentFragment {

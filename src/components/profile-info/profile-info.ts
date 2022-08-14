@@ -1,5 +1,5 @@
-import { Block } from '../../utils/Block';
-import { Avatar } from '../avatar';
+import { Block } from '@/utils/Block';
+import { Avatar } from '@/components/avatar';
 import styles from './profile-info.module.scss';
 import tmpl from './profile-info.hbs';
 
